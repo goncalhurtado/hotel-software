@@ -7,15 +7,31 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { Link, NavLink } from "react-router-dom";
+import { CustomLink, CustomLinkMobile } from "./Links";
 
 const Navbar = () => {
-  const pages = ["Inicio", "Habitaciones", "Reservas", "Contacto"];
-  // const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const pages = [
+    {
+      name: "Home",
+      path: "/",
+    },
+    {
+      name: "Rooms",
+      path: "/rooms",
+    },
+    {
+      name: "Booking",
+      path: "/bookings",
+    },
+    {
+      name: "Contact",
+      path: "/contact",
+    },
+  ];
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   // const [anchorElUser, setAnchorElUser] = useState(null);
@@ -55,8 +71,13 @@ const Navbar = () => {
               textDecoration: "none",
             }}
           ></Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          {/* HAMBURGUER MENU */}
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", md: "none" },
+            }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -86,8 +107,10 @@ const Navbar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <CustomLinkMobile page={page} />
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -116,9 +139,10 @@ const Navbar = () => {
               justifyContent: "end",
             }}
           >
+            {/* <NavLink> */}
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.name}
                 onClick={handleCloseNavMenu}
                 sx={{
                   my: 2,
@@ -126,9 +150,10 @@ const Navbar = () => {
                   display: "block",
                 }}
               >
-                {page}
+                <CustomLink page={page} />
               </Button>
             ))}
+            {/* </NavLink> */}
           </Box>
         </Toolbar>
       </Container>
