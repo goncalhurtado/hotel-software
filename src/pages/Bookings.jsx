@@ -1,7 +1,12 @@
 import React from "react";
+import DatePickerBooking from "../components/DatePickerBooking";
 
 const Bookings = () => {
-  return <div>Bookings</div>;
+  return (
+    <div>
+      <DatePickerBooking />
+    </div>
+  );
 };
 
 export default Bookings;
