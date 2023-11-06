@@ -1,19 +1,77 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+    "rooms": [{
+            "id": 11,
+            "category_id": 20,
+            "room_number": "101"
+        },
+        {
+            "id": 12,
+            "category_id": 20,
+            "room_number": "102"
+        }, {
+            "id": 13,
+            "category_id": 21,
+            "room_number": "103"
+        },
+        {
+            "id": 14,
+            "category_id": 21,
+            "room_number": "104"
+        },
+        {
+            "id": 15,
+            "category_id": 21,
+            "room_number": "105"
+        },
+        {
+            "id": 16,
+            "category_id": 22,
+            "room_number": "106"
+        },
+        {
+            "id": 17,
+            "category_id": 22,
+            "room_number": "107"
+        },
+        {
+            "id": 18,
+            "category_id": 23,
+            "room_number": "108"
+        }
+    ],
+    "booking": [{
+        "id": 1,
+        "id_room": 15,
+        "start_date": "1-10-10",
+        "end_date": "1-10-10"
+    }],
+    "categories": [{
+            "name": "matrimonial",
+            "id": 20,
+            "description": "Habitación doble con una cama matrimonial",
+            "price": 100,
+            "capacity": "2"
+        },
+        {
+            "name": "Doble",
+            "id": 21,
+            "description": "Habitación doble con dos camas",
+            "price": 120,
+            "capacity": "2"
+        },
+        {
+            "name": "Triple",
+            "id": 22,
+            "description": "Habitación triple con tres camas",
+            "price": 150,
+            "capacity": "3"
+        },
+        {
+            "name": "Cuadruple",
+            "id": 23,
+            "description": "Habitación cuadruple con cuatro camas",
+            "price": 180,
+            "capacity": "4"
+        }
+    ]
 }
