@@ -40,11 +40,19 @@
         }
     ],
     "booking": [{
-        "id": 1,
-        "id_room": 15,
-        "start_date": "1-10-10",
-        "end_date": "1-10-10"
-    }],
+            "id": 1,
+            "id_room": 15,
+            "start_date": "1-10-10",
+            "end_date": "1-10-10"
+        },
+
+        {
+            "id": 2,
+            "id_room": 13,
+            "start_date": "1-10-10",
+            "end_date": "1-10-10"
+        }
+    ],
     "categories": [{
             "name": "matrimonial",
             "id": 20,
