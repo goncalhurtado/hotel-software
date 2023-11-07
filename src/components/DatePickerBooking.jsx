@@ -9,6 +9,7 @@ import { axiosInstance } from "../config/axiosInstance";
 import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+import { format } from "date-fns";
 
 const DatePickerBooking = () => {
   const getCapacity = async () => {
@@ -26,27 +27,25 @@ const DatePickerBooking = () => {
   const [dateRange, setDateRange] = useState({
     startDate: new Date(),
     endDate: new Date(),
+    key: "selection",
   });
 
-  // const handleChangeFrom = (e) => {
-  //   const fechaAnalizada = parseISO(e.target.value);
-  //   setDateRange({ ...dateRange, to: e.target.value });
-  //   console.log(fechaAnalizada);
-  // };
-
-  // const handleChangeTo = (selectedTo) => {
-  //   console.log(selectedTo);
-  //   setDateRange({ ...dateRange, to: selectedTo });
-
-  //   // console.log(result);
-  // };
+  const [selected, setSelected] = useState({
+    start_date: "",
+    end_date: "",
+  });
 
   const handleSelect = (ranges) => {
+    const from = format(ranges.selection.startDate, "MM/dd/yyyy");
+    const to = format(ranges.selection.endDate, "MM/dd/yyyy");
+
     setDateRange({
       startDate: ranges.selection.startDate,
       endDate: ranges.selection.endDate,
+      key: "selection",
     });
-    console.log(dateRange);
+
+    setSelected({ start_date: from, end_date: to });
   };
 
   const selectionRange = {
@@ -89,7 +88,9 @@ const DatePickerBooking = () => {
           <Button variant="contained">Search</Button>
         </Box>
       </Box>
-      {/* <p>{`Desde el ${dateRange.from} hasta el ${dateRange.to}`}</p> */}
+      <p>
+        Seleccionado desde el {selected.start_date} hasta el {selected.end_date}
+      </p>
     </form>
   );
 };
