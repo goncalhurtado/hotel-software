@@ -41,16 +41,16 @@
     ],
     "booking": [{
             "id": 1,
-            "id_room": 15,
-            "start_date": "1-10-10",
-            "end_date": "1-10-10"
+            "room_id": 15,
+            "check_in": "11/07/2023",
+            "check_out": "11/10/2023"
         },
 
         {
             "id": 2,
-            "id_room": 13,
-            "start_date": "1-10-10",
-            "end_date": "1-10-10"
+            "room_id": 13,
+            "check_in": "11/9/2023",
+            "check_out": "11/12/2023"
         }
     ],
     "categories": [{
