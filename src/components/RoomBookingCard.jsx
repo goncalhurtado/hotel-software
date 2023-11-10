@@ -6,31 +6,33 @@ import { Box, Button } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import Grid from "@mui/material/Grid";
 
-const RoomBookingCard = ({ room }) => {
+const RoomBookingCard = ({ category, setSelected }) => {
   return (
-    <div>
-      <Grid item xs={12} sm={12} md={12} lg={12}>
-        <Card sx={{ maxWidth: 800, marginBottom: "20px" }}>
-          <CardContent>
-            <Box display="flex">
-              <Box>imagen</Box>
-              <Box>
-                <Typography gutterBottom variant="h5" component="div">
-                  {room.name}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {room.description}
-                </Typography>
-                {/* {capacity.map((person) => (
-                  <PersonIcon key={person} />
-                ))} */}
-              </Box>
+    <Grid item xs={12} sm={12} md={12} lg={12}>
+      <Card sx={{ maxWidth: 800, marginBottom: "20px" }}>
+        <CardContent>
+          <Box display="flex">
+            <Box>imagen</Box>
+            <Box>
+              <Typography gutterBottom variant="h5" component="div">
+                {category.name}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {category.description}
+              </Typography>
+              <Button
+                variant="contained"
+                onClick={() =>
+                  setSelected({ selected: true, category: category })
+                }
+              >
+                Seleccionar Habitacion
+              </Button>
             </Box>
-            <Button variant="contained">Reservar</Button>
-          </CardContent>
-        </Card>
-      </Grid>
-    </div>
+          </Box>
+        </CardContent>
+      </Card>
+    </Grid>
   );
 };
 
