@@ -5,7 +5,9 @@ import DatePickerBooking from "./DatePickerBooking";
 import { axiosInstance } from "../config/axiosInstance";
 import { getBookings } from "../helpers/booking";
 
-const BookingForm = () => {
+const SearchForm = ({ setRooms }) => {
+  const [showDate, setShowDate] = useState(false);
+
   const [dataForm, setDataForm] = useState({
     check_in: "",
     check_out: "",
@@ -21,25 +23,21 @@ const BookingForm = () => {
     dataForm.check_in = date.start_date;
     dataForm.check_out = date.end_date;
     dataForm.capacity = capacity;
-    // console.log(dataForm);
-    const resp = await getBookings(dataForm);
-
-    // try {
-
-    //   const response = await axiosInstance.get("/categories");
-    //   const { data } = response;
-    //   console.log(data);
-    //   //   const filteredCategories = categories.filter(category => category.capacity === dataForm.capacity);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      const resp = await getBookings(dataForm, setRooms);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
       <Box>
         <Box display={"flex"}>
-          <DatePickerBooking date={date} setDate={setDate} />
+          {showDate && <DatePickerBooking date={date} setDate={setDate} />}
+          <a onClick={() => setShowDate(!showDate)}>
+            {!showDate ? "Ver Fechas" : "Cerrar"}
+          </a>
           <SelectCapacity capacity={capacity} setCapacity={setCapacity} />
         </Box>
         <Box marginTop="10px" marginLeft="15px">
@@ -52,4 +50,4 @@ const BookingForm = () => {
   );
 };
 
-export default BookingForm;
+export default SearchForm;

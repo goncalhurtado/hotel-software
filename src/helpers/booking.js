@@ -3,7 +3,7 @@ import { axiosInstance } from "../config/axiosInstance"
 
 
 
-export const getBookings = async(dataForm) => {
+export const getBookings = async(dataForm, setRooms) => {
 
 
     try {
@@ -49,6 +49,21 @@ export const getBookings = async(dataForm) => {
 
 
                 console.log(availableRooms, "esto es availableRooms");
+
+                const categoriasUnicas = new Set();
+                availableRooms.forEach(objeto => {
+                    categoriasUnicas.add(objeto.category_id);
+                });
+
+                const arrayCategories = Array.from(categoriasUnicas);
+                const categories = await axiosInstance.get("/categories");
+                const categoriesAvailable = categories.data.filter(objeto => arrayCategories.includes(categories.id));
+
+                console.log(categoriesAvailable);
+                setRooms({
+                    categories: filteredCategories,
+                    rooms: availableRooms
+                })
 
 
             } catch (error) {
