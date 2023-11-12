@@ -11,8 +11,13 @@ const BookingPreview = ({ selected, setSelected }) => {
       <Card>
         <CardContent>
           <Typography>Cantidad de Noches: </Typography>
-          <Typography>Tipo de Habitacion: {selected.category.name}</Typography>
-          <Typography>Precio: ${selected.category.price}</Typography>
+          <Typography>
+            Tipo de Habitacion:{" "}
+            {selected.selected ? selected.category.name : ""}
+          </Typography>
+          <Typography>
+            Precio: ${selected.selected ? selected.category.price : ""}
+          </Typography>
           <Button
             disabled={selected.selected ? false : true}
             variant="contained"

@@ -8,17 +8,23 @@ import BookingPreview from "../components/BookingPreview";
 import Reservation from "../components/Reservation";
 
 const Bookings = () => {
-  const [rooms, setRooms] = useState({
+  const [availables, setAvailables] = useState({
     categories: [],
     rooms: [],
   });
+
   const [selected, setSelected] = useState({
     selected: false,
     category: [],
     booked: false,
+    check_in: "",
+    check_out: "",
+    capacity: "",
+    nigths: "",
   });
 
-  console.log(selected, "selected");
+  const [bookingDate, setBookingDate] = useState({});
+
   return (
     <div>
       {!selected.booked ? (
@@ -29,17 +35,22 @@ const Bookings = () => {
             alignItems="center"
             marginTop="10px"
           >
-            <SearchForm setRooms={setRooms} />
+            <SearchForm
+              setAvailables={setAvailables}
+              selected={selected}
+              setSelected={setSelected}
+            />
           </Box>
           <Box>
             <Grid container>
               <Grid item lg={8}>
                 <Grid container>
-                  {rooms.categories?.map((category) => (
+                  {availables.categories?.map((category) => (
                     <RoomBookingCard
                       key={category.id}
                       category={category}
                       setSelected={setSelected}
+                      availables={availables}
                     />
                   ))}
                 </Grid>
