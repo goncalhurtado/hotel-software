@@ -12,11 +12,36 @@ const RoomCard = ({ room }) => {
 
   return (
     <>
-      <Grid item xs={12} sm={12} md={12} lg={12}>
-        <Card sx={{ maxWidth: 800, marginBottom: "20px" }}>
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        md={12}
+        lg={12}
+        sx={{ display: "flex", justifyContent: "center" }}
+      >
+        <Card
+          sx={{
+            maxWidth: 800,
+            width: "100%",
+            marginBottom: "20px",
+          }}
+        >
           <CardContent>
             <Box display="flex">
-              <Box>imagen</Box>
+              <Box
+                sx={{
+                  height: 233,
+                  width: 350,
+                  maxHeight: { xs: 233, md: 167 },
+                  maxWidth: { xs: 350, md: 250 },
+                  marginRight: "20px",
+                }}
+                component="img"
+                alt={room.name}
+                src={room.image}
+              />
+
               <Box>
                 <Typography gutterBottom variant="h5" component="div">
                   {room.name}

@@ -47,9 +47,14 @@ const Navbar = ({ isLogged, setIsLogged }) => {
       path: "/admin",
     },
     {
+      name: "Categories",
+      path: "/admin/categories",
+    },
+    {
       name: "Rooms",
       path: "/admin/rooms",
     },
+
     {
       name: "Booking",
       path: "/admin/bookings",
