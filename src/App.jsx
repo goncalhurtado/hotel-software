@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Rooms from "./pages/Rooms";
 import Contact from "./pages/Contact";
 import Admin from "./pages/admin/Admin";
+import AdminCategories from "./pages/admin/AdminCategories";
 
 import AdminRooms from "./pages/admin/AdminRooms";
 import AdminBookings from "./pages/admin/AdminBookings";
@@ -28,6 +29,7 @@ function App() {
         <Route element={<PrivateRoutes setIsLogged={setIsLogged} />}>
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/bookings" element={<AdminBookings />} />
+          <Route path="/admin/categories" element={<AdminCategories />} />
           <Route path="/admin/rooms" element={<AdminRooms />} />
         </Route>
       </Routes>
