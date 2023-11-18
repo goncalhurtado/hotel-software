@@ -5,26 +5,21 @@ import DatePickerBooking from "./DatePickerBooking";
 import { axiosInstance } from "../config/axiosInstance";
 import { getBookings } from "../helpers/booking";
 
-const SearchForm = ({ setRooms }) => {
+const SearchForm = ({ setAvailables, selected }) => {
   const [showDate, setShowDate] = useState(false);
+  const [capacity, setCapacity] = useState(1);
 
-  const [dataForm, setDataForm] = useState({
-    check_in: "",
-    check_out: "",
-    capacity: "",
-  });
   const [date, setDate] = useState({
     start_date: "",
     end_date: "",
   });
-  const [capacity, setCapacity] = useState(1);
 
   const handleSubmit = async () => {
-    dataForm.check_in = date.start_date;
-    dataForm.check_out = date.end_date;
-    dataForm.capacity = capacity;
     try {
-      const resp = await getBookings(dataForm, setRooms);
+      (selected.check_in = date.start_date),
+        (selected.check_out = date.end_date),
+        (selected.capacity = capacity),
+        await getBookings(selected, setAvailables);
     } catch (error) {
       console.log(error);
     }
@@ -34,7 +29,9 @@ const SearchForm = ({ setRooms }) => {
     <>
       <Box>
         <Box display={"flex"}>
-          {showDate && <DatePickerBooking date={date} setDate={setDate} />}
+          <Box sx={{ display: showDate ? "block" : "none" }}>
+            {<DatePickerBooking date={date} setDate={setDate} />}
+          </Box>
           <a onClick={() => setShowDate(!showDate)}>
             {!showDate ? "Ver Fechas" : "Cerrar"}
           </a>

@@ -5,19 +5,23 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { Box, Button } from "@mui/material";
 
-const BookingPreview = ({ selected }) => {
+const BookingPreview = ({ selected, setSelected }) => {
   return (
     <Grid item lg={12}>
       <Card>
         <CardContent>
-          <Box>Cantidad de Noches</Box>
-          <Box>Precio Total</Box>
+          <Typography>Cantidad de Noches: </Typography>
           <Typography>
-            Seleccionada la habitacion: {selected.category.name}
+            Tipo de Habitacion:{" "}
+            {selected.selected ? selected.category.name : ""}
+          </Typography>
+          <Typography>
+            Precio: ${selected.selected ? selected.category.price : ""}
           </Typography>
           <Button
             disabled={selected.selected ? false : true}
             variant="contained"
+            onClick={() => setSelected({ ...selected, booked: true })}
           >
             Reservar
           </Button>

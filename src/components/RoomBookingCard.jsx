@@ -6,7 +6,7 @@ import { Box, Button } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import Grid from "@mui/material/Grid";
 
-const RoomBookingCard = ({ category, setSelected }) => {
+const RoomBookingCard = ({ category, setSelected, availables }) => {
   return (
     <Grid item xs={12} sm={12} md={12} lg={12}>
       <Card sx={{ maxWidth: 800, marginBottom: "20px" }}>
@@ -23,10 +23,17 @@ const RoomBookingCard = ({ category, setSelected }) => {
               <Button
                 variant="contained"
                 onClick={() =>
-                  setSelected({ selected: true, category: category })
+                  setSelected((prevSelected) => ({
+                    ...prevSelected,
+                    selected: true,
+                    category: category,
+                  }))
                 }
+                disabled={availables.rooms.length != 0 ? false : true}
               >
-                Seleccionar Habitacion
+                {availables.rooms.length != 0
+                  ? "Seleccionar"
+                  : "No hay habitaciones disponibles"}
               </Button>
             </Box>
           </Box>
