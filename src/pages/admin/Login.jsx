@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,11 +11,39 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { axiosInstance } from "../../config/axiosInstance";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const handleSubmit = (e) => {
+const Login = ({ setIsLogged }) => {
+  const [error, setError] = useState({ show: false, message: "" });
+  const [dataForm, setDataForm] = useState({
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setError({ show: false, message: "" });
+    const { name, value } = e.target;
+    setDataForm((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("hola");
+    try {
+      const response = await axiosInstance.post("/login", dataForm);
+      const { token } = response.data;
+      localStorage.setItem("token", token);
+
+      navigate("/admin");
+    } catch (error) {
+      console.log(error.response.data);
+      const { message } = error.response.data;
+      setError({ show: true, message });
+    }
   };
 
   return (
@@ -44,25 +72,26 @@ const Login = () => {
           >
             <TextField
               margin="normal"
-              required
               fullWidth
               id="email"
               label="Email Address"
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={handleChange}
+              error={error.show ? true : false}
             />
             <TextField
               margin="normal"
-              required
               fullWidth
               name="password"
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
+              onChange={handleChange}
+              error={error.show ? true : false}
             />
-
+            <Typography color={"red"}>{error.show && error.message}</Typography>
             <Button
               type="submit"
               fullWidth

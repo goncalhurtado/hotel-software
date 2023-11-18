@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,10 +10,18 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { CustomLink, CustomLinkMobile } from "./Links";
 
-const Navbar = () => {
+const Navbar = ({ isLogged, setIsLogged }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLogged(false);
+    navigate("/login");
+  };
+
   const pages = [
     {
       name: "Home",
@@ -33,22 +41,29 @@ const Navbar = () => {
     },
   ];
 
+  const pagesAdmin = [
+    {
+      name: "Admin",
+      path: "/admin",
+    },
+    {
+      name: "Rooms",
+      path: "/admin/rooms",
+    },
+    {
+      name: "Booking",
+      path: "/admin/bookings",
+    },
+  ];
+
   const [anchorElNav, setAnchorElNav] = useState(null);
-  // const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -80,7 +95,6 @@ const Navbar = () => {
           >
             <IconButton
               size="large"
-              aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
@@ -106,13 +120,27 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    <CustomLinkMobile page={page} />
-                  </Typography>
+              {!isLogged
+                ? pages.map((page) => (
+                    <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">
+                        <CustomLinkMobile page={page} />
+                      </Typography>
+                    </MenuItem>
+                  ))
+                : pagesAdmin.map((page) => (
+                    <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">
+                        <CustomLinkMobile page={page} />
+                      </Typography>
+                    </MenuItem>
+                  ))}
+
+              {isLogged && (
+                <MenuItem onClick={handleLogout}>
+                  <Typography textAlign="center">Loggout</Typography>
                 </MenuItem>
-              ))}
+              )}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -140,20 +168,46 @@ const Navbar = () => {
             }}
           >
             {/* <NavLink> */}
-            {pages.map((page) => (
+            {!isLogged
+              ? pages.map((page) => (
+                  <Button
+                    key={page.name}
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 2,
+                      color: "white",
+                      display: "block",
+                    }}
+                  >
+                    <CustomLink page={page} />
+                  </Button>
+                ))
+              : pagesAdmin.map((page) => (
+                  <Button
+                    key={page.name}
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 2,
+                      color: "white",
+                      display: "block",
+                    }}
+                  >
+                    <CustomLink page={page} />
+                  </Button>
+                ))}
+
+            {isLogged && (
               <Button
-                key={page.name}
-                onClick={handleCloseNavMenu}
+                onClick={handleLogout}
                 sx={{
                   my: 2,
                   color: "white",
                   display: "block",
                 }}
               >
-                <CustomLink page={page} />
+                Loggout
               </Button>
-            ))}
-            {/* </NavLink> */}
+            )}
           </Box>
         </Toolbar>
       </Container>

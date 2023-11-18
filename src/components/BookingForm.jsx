@@ -37,12 +37,12 @@ const BookingForm = ({ selected }) => {
     e.preventDefault();
     const reservation = setBooking(formData);
 
-    try {
-      const response = await axiosInstance.post("/booking", reservation);
-      console.log("Reserva agregada:", response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   const response = await axiosInstance.post("/booking", reservation);
+    //   console.log("Reserva agregada:", response.data);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (

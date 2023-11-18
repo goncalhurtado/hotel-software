@@ -1,9 +1,8 @@
+import { React, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import PrivateRoutes from "./Routes/PrivateRoutes";
 import Login from "./pages/admin/Login";
-import Navegation from "./components/Navegation";
-import NavbarAdmin from "./components/admin/NavbarAdmin";
 import Navbar from "./components/Navbar";
 import Bookings from "./pages/Bookings";
 import Home from "./pages/Home";
@@ -15,23 +14,18 @@ import AdminRooms from "./pages/admin/AdminRooms";
 import AdminBookings from "./pages/admin/AdminBookings";
 
 function App() {
-  const location = useLocation();
-
-  // Comprueba si la ruta actual es "/admin"
-  const isAdminRoute = location.pathname.includes("/admin");
+  const [isLogged, setIsLogged] = useState(false);
 
   return (
     <>
-      <Navegation />
-      {/* Utiliza un ternario para decidir qué Navbar renderizar
-      {isAdminRoute ? <NavbarAdmin /> : <Navbar />} */}
+      <Navbar isLogged={isLogged} setIsLogged={setIsLogged} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/rooms" element={<Rooms />} />
         <Route path="/bookings" element={<Bookings />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login />} />
-        <Route element={<PrivateRoutes />}>
+        <Route path="/login" element={<Login setIsLogged={setIsLogged} />} />
+        <Route element={<PrivateRoutes setIsLogged={setIsLogged} />}>
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/bookings" element={<AdminBookings />} />
           <Route path="/admin/rooms" element={<AdminRooms />} />
