@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
 import CategoriesTable from "../../components/admin/categories/CategoriesTable";
 import { axiosInstance } from "../../config/axiosInstance";
 import EditCategory from "../../components/admin/categories/EditCategory";
+import Typography from "@mui/material/Typography";
 
 const AdminCategories = () => {
   const [categories, setCategories] = useState([]);
@@ -46,6 +48,9 @@ const AdminCategories = () => {
 
   return (
     <>
+      <Box>
+        <Typography variant="h4">Categories</Typography>
+      </Box>
       {!editing ? (
         <CategoriesTable
           categories={categories}

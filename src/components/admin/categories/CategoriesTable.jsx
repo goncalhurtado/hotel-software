@@ -49,7 +49,7 @@ const CategoriesTable = ({ categories, handleEdit, setCategoryToEdit }) => {
 
   return (
     <>
-      <DataTable title="Categorias" data={categories} columns={columns} />
+      <DataTable data={categories} columns={columns} />
     </>
   );
 };

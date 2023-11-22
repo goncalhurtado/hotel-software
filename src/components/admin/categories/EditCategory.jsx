@@ -7,12 +7,26 @@ import CategoriesForm from "./CategoriesForm";
 
 const EditCategory = ({ categoryToEdit, setEditing }) => {
   return (
-    <div>
+    <Box>
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        alignItems={"center"}
+        sx={{ marginTop: "15px" }}
+      >
+        <Typography>Editing the category "{categoryToEdit.name}"</Typography>
+        <Button
+          variant="outlined"
+          sx={{ marginLeft: "10px" }}
+          onClick={() => setEditing(false)}
+        >
+          return to categories
+        </Button>
+      </Box>
       <Box>
         <CategoriesForm categoryToEdit={categoryToEdit} />
       </Box>
-      <Button onClick={() => setEditing(false)}>Volver Atras</Button>
-    </div>
+    </Box>
   );
 };
 

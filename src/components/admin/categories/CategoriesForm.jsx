@@ -1,40 +1,20 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
-
+import { Button, Grid } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-
 import "../../../style/admin/categories/CategoriesForm.css";
-import { ca } from "date-fns/locale";
 
 const CategoriesForm = ({ categoryToEdit }) => {
   const [formData, setFormData] = useState({});
 
   const { name, description, capacity, price, image, _id } = categoryToEdit;
 
-  const handleChange = (e) => {
-    // const { name, value } = e.target;
-    // setFormData((prevData) => ({
-    //   ...prevData,
-    //   info: {
-    //     ...prevData.info,
-    //     [name]: value,
-    //   },
-    // }));
-  };
-  console.log(categoryToEdit);
-
+  const handleChange = (e) => {};
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // try {
-    //   const response = await axiosInstance.post("/booking", reservation);
-    //   console.log("Reserva agregada:", response.data);
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
@@ -49,61 +29,95 @@ const CategoriesForm = ({ categoryToEdit }) => {
   });
 
   return (
-    <Box display={"flex"} flexDirection={"column"}>
-      <TextField
-        id="filled-helperText"
-        label="Name"
-        defaultValue={name}
-        // helperText="Some important text"
-        variant="outlined"
-        className="textFieldCategory"
-      />
-      <TextField
-        id="outlined-multiline-static"
-        label="Description"
-        defaultValue={description}
-        multiline
-        rows={5}
-        sx={{ width: "100%" }}
-        className="textFieldCategory"
-      />
-      <Box display={"flex"} justifyContent="space-between">
-        <TextField
-          id="filled-helperText"
-          label="Capacity"
-          defaultValue={capacity}
-          variant="outlined"
-          className="textFieldCategory"
-          type="number"
-          sx={{ width: "49%" }}
-        />
-        <TextField
-          id="filled-helperText"
-          label="Price"
-          defaultValue={price}
-          variant="outlined"
-          className="textFieldCategory"
-          type="number"
-          sx={{ width: "49%" }}
-        />
-      </Box>
-
-      <Box>
-        <img src={image} alt={`image of the category ${name}`} />
-        <Button
-          component="label"
-          variant="contained"
-          startIcon={<CloudUploadIcon />}
+    <Box margin={2}>
+      <Grid
+        container
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Grid
+          container
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
         >
-          Upload new image
-          <VisuallyHiddenInput
-            type="file"
-            // multiple
-          />
-        </Button>
-      </Box>
-
-      <Button variant="contained">Modificar</Button>
+          <Grid item container direction="row" justifyContent="center">
+            <TextField
+              id="filled-helperText"
+              label="Name"
+              defaultValue={name}
+              variant="outlined"
+              className="nameCategory"
+            />
+            <TextField
+              id="filled-helperText"
+              label="Capacity"
+              defaultValue={capacity}
+              variant="outlined"
+              className="numberCategory"
+              type="number"
+            />
+            <TextField
+              id="filled-helperText"
+              label="Price"
+              defaultValue={price}
+              variant="outlined"
+              className="numberCategory"
+              type="number"
+            />
+          </Grid>
+          <Grid item container justifyContent="center" alignItems="center">
+            <TextField
+              id="outlined-multiline-static"
+              label="Description"
+              defaultValue={description}
+              multiline
+              rows={5}
+              sx={{
+                width: "590px",
+              }}
+              className="descriptionCategory"
+            />
+          </Grid>
+          {/* Rest of your code */}
+        </Grid>
+        <Grid item></Grid>
+        <Grid item sx={{ width: "590px" }}>
+          <Grid container>
+            <Grid sx={{ marginLeft: "5px" }} item>
+              <Typography>Actual Image</Typography>
+              <img
+                src={image}
+                alt={`image of the category ${name}`}
+                width={300}
+              />
+            </Grid>
+            <Grid
+              item
+              display={"flex"}
+              flexDirection={"column"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              sx={{ width: "285px" }}
+            >
+              <Button
+                component="label"
+                variant="contained"
+                startIcon={<CloudUploadIcon />}
+              >
+                Upload new image
+                <VisuallyHiddenInput type="file" />
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item>
+          <Button sx={{ marginTop: "18px" }} variant="contained">
+            Modificar
+          </Button>
+        </Grid>
+      </Grid>
     </Box>
   );
 };
