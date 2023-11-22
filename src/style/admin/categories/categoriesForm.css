@@ -1,0 +1,17 @@
+.nameCategory {
+    margin-top: 10px!important;
+    margin-bottom: 10px!important;
+    width: 350px;
+}
+
+.numberCategory {
+    margin-top: 10px!important;
+    margin-bottom: 10px!important;
+    margin-left: 20px!important;
+    width: 100px;
+}
+
+.descriptionCategory {
+    margin-top: 10px!important;
+    margin-bottom: 10px!important;
+}

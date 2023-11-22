@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from "react";
-import CategoriesTable from "../../components/admin/CategoriesTable";
+import Box from "@mui/material/Box";
+import CategoriesTable from "../../components/admin/categories/CategoriesTable";
 import { axiosInstance } from "../../config/axiosInstance";
-import EditCategory from "../../components/admin/EditCategory";
+import EditCategory from "../../components/admin/categories/EditCategory";
+import Typography from "@mui/material/Typography";
 
 const AdminCategories = () => {
   const [categories, setCategories] = useState([]);
 
-  //Modal
-  const [open, setOpen] = useState(false);
-
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
   //Edit Category
+
+  const [editing, setEditing] = useState(false);
 
   const [categoryToEdit, setCategoryToEdit] = useState({
     name: "",
     description: "",
     capacity: "",
     price: "",
+    image: "",
     _id: "",
   });
 
@@ -29,9 +28,10 @@ const AdminCategories = () => {
       description: row.description,
       capacity: row.capacity,
       price: row.price,
+      image: row.image,
       _id: row._id,
     });
-    setOpen(true);
+    setEditing(true);
   };
 
   const getCategories = async () => {
@@ -48,16 +48,18 @@ const AdminCategories = () => {
 
   return (
     <>
-      <CategoriesTable
-        categories={categories}
-        handleEdit={handleEdit}
-        setCategoryToEdit={setCategoryToEdit}
-      />
-      <EditCategory
-        open={open}
-        categoryToEdit={categoryToEdit}
-        handleClose={handleClose}
-      />
+      <Box>
+        <Typography variant="h4">Categories</Typography>
+      </Box>
+      {!editing ? (
+        <CategoriesTable
+          categories={categories}
+          handleEdit={handleEdit}
+          setCategoryToEdit={setCategoryToEdit}
+        />
+      ) : (
+        <EditCategory categoryToEdit={categoryToEdit} setEditing={setEditing} />
+      )}
     </>
   );
 };
