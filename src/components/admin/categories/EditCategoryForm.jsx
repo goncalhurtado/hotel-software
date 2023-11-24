@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Grid } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import "../../../style/admin/categories/CategoriesForm.css";
 
-const EditCategoriesForm = ({
+const EditCategoryForm = ({
   categoryToEdit,
   formData,
   setFormData,
@@ -25,18 +24,6 @@ const EditCategoriesForm = ({
     setImageURL(URL.createObjectURL(...e.target.files));
     setImg(true);
   };
-
-  const VisuallyHiddenInput = styled("input")({
-    clip: "rect(0 0 0 0)",
-    clipPath: "inset(50%)",
-    height: 1,
-    overflow: "hidden",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    whiteSpace: "nowrap",
-    width: 1,
-  });
 
   return (
     <Box margin={2}>
@@ -144,4 +131,4 @@ const EditCategoriesForm = ({
   );
 };
 
-export default EditCategoriesForm;
+export default EditCategoryForm;

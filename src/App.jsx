@@ -30,6 +30,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/bookings" element={<AdminBookings />} />
           <Route path="/admin/categories" element={<AdminCategories />} />
+          {/* <Route path="/admin/categories/create" element={<CreateCategory />} /> */}
           <Route path="/admin/rooms" element={<AdminRooms />} />
         </Route>
       </Routes>

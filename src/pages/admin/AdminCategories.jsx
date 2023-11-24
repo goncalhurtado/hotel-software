@@ -4,14 +4,19 @@ import CategoriesTable from "../../components/admin/categories/CategoriesTable";
 import { axiosInstance } from "../../config/axiosInstance";
 import EditCategory from "../../components/admin/categories/EditCategory";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import CreateCategory from "../../components/admin/categories/CreateCategory";
 
 const AdminCategories = () => {
   const [categories, setCategories] = useState([]);
 
-  //Edit Category
+  // Create Category
+
+  const [creating, setCreating] = useState(false);
+
+  // Edit Category
 
   const [editing, setEditing] = useState(false);
-
   const [categoryToEdit, setCategoryToEdit] = useState({
     name: "",
     description: "",
@@ -48,19 +53,42 @@ const AdminCategories = () => {
 
   return (
     <>
-      <Box>
-        <Typography variant="h4">Categories</Typography>
+      <Box display={"flex"}>
+        <Typography variant="h4" sx={{ marginLeft: "15px" }}>
+          Categories
+        </Typography>
+
+        {!creating && !editing && (
+          <Button
+            sx={{
+              marginLeft: "auto",
+              marginRight: "112px",
+              marginTop: "8px",
+            }}
+            variant="contained"
+            onClick={() => setCreating(true)}
+          >
+            create category
+          </Button>
+        )}
       </Box>
-      {!editing ? (
-        <CategoriesTable
-          categories={categories}
-          handleEdit={handleEdit}
-          setCategoryToEdit={setCategoryToEdit}
-        />
+      {!creating ? (
+        !editing ? (
+          <CategoriesTable
+            categories={categories}
+            handleEdit={handleEdit}
+            setCategoryToEdit={setCategoryToEdit}
+          />
+        ) : (
+          <EditCategory
+            categoryToEdit={categoryToEdit}
+            setEditing={setEditing}
+            getCategories={getCategories}
+          />
+        )
       ) : (
-        <EditCategory
-          categoryToEdit={categoryToEdit}
-          setEditing={setEditing}
+        <CreateCategory
+          setCreating={setCreating}
           getCategories={getCategories}
         />
       )}
