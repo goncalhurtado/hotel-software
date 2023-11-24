@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import EditCategoriesForm from "./EditCategoriesForm";
+import EditCategoryForm from "./EditCategoryForm";
 import { axiosInstance } from "../../../config/axiosInstance";
 import { LoadingButton } from "@mui/lab";
 import Swal from "sweetalert2";
@@ -23,7 +23,6 @@ const EditCategory = ({ categoryToEdit, setEditing, getCategories }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     const data = new FormData();
     data.append("name", formData.name);
     data.append("description", formData.description);
@@ -33,7 +32,6 @@ const EditCategory = ({ categoryToEdit, setEditing, getCategories }) => {
     setLoading(true);
     try {
       const response = await axiosInstance.put(`/category/${_id}`, data);
-
       Swal.fire({
         title: response.data.message,
         icon: "success",
@@ -43,7 +41,7 @@ const EditCategory = ({ categoryToEdit, setEditing, getCategories }) => {
       getCategories();
     } catch (error) {
       Swal.fire({
-        title: error.message,
+        title: error.response.data.message || error.message,
         icon: "error",
         confirmButtonColor: "#d33",
       });
@@ -65,12 +63,12 @@ const EditCategory = ({ categoryToEdit, setEditing, getCategories }) => {
           sx={{ marginLeft: "10px" }}
           onClick={() => setEditing(false)}
         >
-          return to categories
+          return
         </Button>
       </Box>
 
       <Box>
-        <EditCategoriesForm
+        <EditCategoryForm
           categoryToEdit={categoryToEdit}
           formData={formData}
           setFormData={setFormData}
