@@ -58,7 +58,11 @@ const AdminCategories = () => {
           setCategoryToEdit={setCategoryToEdit}
         />
       ) : (
-        <EditCategory categoryToEdit={categoryToEdit} setEditing={setEditing} />
+        <EditCategory
+          categoryToEdit={categoryToEdit}
+          setEditing={setEditing}
+          getCategories={getCategories}
+        />
       )}
     </>
   );

@@ -2,17 +2,14 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Grid } from "@mui/material";
-import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import "../../../style/admin/categories/CategoriesForm.css";
 
-const CategoriesForm = ({
+const EditCategoriesForm = ({
   categoryToEdit,
   formData,
   setFormData,
   setNewImg,
-  handleSubmit,
 }) => {
   const { name, description, capacity, price, image, _id } = categoryToEdit;
   const [img, setImg] = useState(false);
@@ -25,12 +22,9 @@ const CategoriesForm = ({
 
   const handleFileChange = (e) => {
     setNewImg([...e.target.files]);
-
-    // setImageURL(URL.createObjectURL(e.target.files[0]));
-    // setImg(true);
+    setImageURL(URL.createObjectURL(...e.target.files));
+    setImg(true);
   };
-
-  //
 
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
@@ -110,10 +104,16 @@ const CategoriesForm = ({
           <Grid container>
             <Grid sx={{ marginLeft: "5px" }} item>
               <Box display={"flex"}>
-                <Button onClick={() => setToogle(false)}>Actual Image</Button>
+                <Button
+                  onClick={() => setToogle(false)}
+                  variant={toogle ? "text" : "outlined"}
+                >
+                  {!imageURL ? "Actual Image" : "Previous Image"}
+                </Button>
                 <Button
                   disabled={!img ? true : false}
                   onClick={() => setToogle(true)}
+                  variant={toogle ? "outlined" : "text"}
                   sx={{ marginLeft: "10px" }}
                 >
                   New Image
@@ -125,7 +125,6 @@ const CategoriesForm = ({
                 width={300}
                 height={200}
               />
-              {/* {imageURL && <img src={imageURL} alt="Preview" />} */}
             </Grid>
             <Grid
               item
@@ -136,32 +135,13 @@ const CategoriesForm = ({
               sx={{ width: "285px" }}
             >
               <input type="file" name="image" onChange={handleFileChange} />
-              {/* <Button
-                component="label"
-                variant="contained"
-                startIcon={<CloudUploadIcon />}
-                name="image"
-                onChange={handleFileChange}
-                type="file"
-              >
-                Upload new image
-                <VisuallyHiddenInput type="file" />
-              </Button> */}
             </Grid>
           </Grid>
         </Grid>
-        <Grid item>
-          <Button
-            sx={{ marginTop: "18px" }}
-            variant="contained"
-            onClick={handleSubmit}
-          >
-            Modificar
-          </Button>
-        </Grid>
+        <Grid item></Grid>
       </Grid>
     </Box>
   );
 };
 
-export default CategoriesForm;
+export default EditCategoriesForm;
