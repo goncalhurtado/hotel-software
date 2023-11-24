@@ -30,11 +30,21 @@ const CreateCategory = ({ setCreating, getCategories }) => {
 
     try {
       const response = await axiosInstance.post(`/category`, data);
-      console.log(response.data);
+      Swal.fire({
+        title: response.data.message,
+        icon: "success",
+        confirmButtonColor: "#3f50b5",
+      });
+
       setCreating(false);
       getCategories();
     } catch (error) {
       console.log(error);
+      Swal.fire({
+        title: error.response.data.message || error.message,
+        icon: "error",
+        confirmButtonColor: "#d33",
+      });
       setLoading(false);
     }
   };

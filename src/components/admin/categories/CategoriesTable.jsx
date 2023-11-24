@@ -1,8 +1,15 @@
 import React from "react";
 import DataTable from "react-data-table-component";
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-const CategoriesTable = ({ categories, handleEdit, setCategoryToEdit }) => {
+const CategoriesTable = ({
+  categories,
+  handleEdit,
+  setCategoryToEdit,
+  handleDelete,
+}) => {
   const columns = [
     {
       name: "Imagen",
@@ -19,6 +26,7 @@ const CategoriesTable = ({ categories, handleEdit, setCategoryToEdit }) => {
     {
       name: "Name",
       selector: (row) => row.name,
+      width: "150px",
     },
     {
       name: "Description",
@@ -28,11 +36,13 @@ const CategoriesTable = ({ categories, handleEdit, setCategoryToEdit }) => {
     {
       name: "Capacity",
       selector: (row) => row.capacity,
+      width: "100px",
     },
     {
       name: "Price",
       //
       selector: (row) => row.price,
+      width: "100px",
     },
     {
       name: "",
@@ -40,7 +50,16 @@ const CategoriesTable = ({ categories, handleEdit, setCategoryToEdit }) => {
       selector: (row) => (
         <Box>
           <Button onClick={(e) => handleEdit(e, row)} variant="contained">
-            Editar
+            Edit
+          </Button>
+          <Button
+            variant="outlined"
+            color="error"
+            startIcon={<DeleteIcon />}
+            sx={{ marginLeft: "9px" }}
+            onClick={(e) => handleDelete(e, row)}
+          >
+            Delete
           </Button>
         </Box>
       ),

@@ -32,7 +32,6 @@ const EditCategory = ({ categoryToEdit, setEditing, getCategories }) => {
     setLoading(true);
     try {
       const response = await axiosInstance.put(`/category/${_id}`, data);
-
       Swal.fire({
         title: response.data.message,
         icon: "success",
@@ -42,7 +41,7 @@ const EditCategory = ({ categoryToEdit, setEditing, getCategories }) => {
       getCategories();
     } catch (error) {
       Swal.fire({
-        title: error.message,
+        title: error.response.data.message || error.message,
         icon: "error",
         confirmButtonColor: "#d33",
       });
