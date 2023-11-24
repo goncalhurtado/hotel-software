@@ -13,6 +13,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.16",
+    "@mui/joy": "^5.0.0-beta.15",
     "@mui/lab": "^5.0.0-alpha.152",
     "@mui/material": "^5.14.17",
     "@mui/styled-engine-sc": "^6.0.0-alpha.4",
@@ -24,13 +25,15 @@
     "luxon": "^3.4.3",
     "moment": "^2.29.4",
     "react": "^18.2.0",
+    "react-alert-template-mui": "^1.0.7",
     "react-data-table-component": "^7.5.4",
     "react-date-picker": "^10.5.2",
     "react-date-range": "^1.4.0",
     "react-datepicker": "^4.21.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.18.0",
-    "styled-components": "^6.1.1"
+    "styled-components": "^6.1.1",
+    "sweetalert2": "^11.10.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
