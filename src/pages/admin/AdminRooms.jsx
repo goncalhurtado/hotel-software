@@ -12,15 +12,12 @@ import ModalRoom from "../../components/admin/rooms/ModalRoom";
 const AdminRooms = () => {
   const [rooms, setRooms] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [action, setAction] = useState("");
 
-  //create room
   const [modal, setModal] = useState({
     state: false,
     action: "",
     data: "",
   });
-  // const handleOpen = () => setOpenModal(true);
 
   const getRooms = async () => {
     try {

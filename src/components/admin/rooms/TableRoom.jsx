@@ -42,7 +42,7 @@ const TableRoom = ({ rooms, categories, setModal }) => {
               setModal({
                 state: true,
                 action: "edit",
-                data: row,
+                data: { room: row, categories: categories },
               });
             }}
             variant="outlined"
