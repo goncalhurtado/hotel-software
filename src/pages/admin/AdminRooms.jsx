@@ -5,11 +5,23 @@ import Typography from "@mui/material/Typography";
 import { axiosInstance } from "../../config/axiosInstance";
 import TableRoom from "../../components/admin/rooms/TableRoom";
 import { useState } from "react";
+import ModalRoom from "../../components/admin/rooms/ModalRoom";
 
 // import { useEffect } from "react";
 
 const AdminRooms = () => {
   const [rooms, setRooms] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [action, setAction] = useState("");
+
+  //create room
+  const [modal, setModal] = useState({
+    state: false,
+    action: "",
+    data: "",
+  });
+  // const handleOpen = () => setOpenModal(true);
+
   const getRooms = async () => {
     try {
       const response = await axiosInstance.get("/rooms");
@@ -19,8 +31,18 @@ const AdminRooms = () => {
     }
   };
 
+  const getCategories = async () => {
+    try {
+      const response = await axiosInstance.get("/categories");
+      setCategories(response.data.categories);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getRooms();
+    getCategories();
   }, []);
 
   return (
@@ -37,11 +59,15 @@ const AdminRooms = () => {
             marginTop: "8px",
           }}
           variant="contained"
+          onClick={() => {
+            setModal({ state: true, action: "create", data: "" });
+          }}
         >
           create room
         </Button>
       </Box>
-      <TableRoom rooms={rooms} />
+      <TableRoom rooms={rooms} categories={categories} setModal={setModal} />
+      <ModalRoom modal={modal} setModal={setModal} />
     </>
   );
 };

@@ -2,31 +2,15 @@ import React from "react";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import { axiosInstance } from "../../../config/axiosInstance";
-import { useEffect } from "react";
 import { useState } from "react";
 import { Typography } from "@mui/material";
 
-const FilterRoom = () => {
-  const [categories, setCategories] = useState([]);
+const FilterRoom = ({ categories }) => {
   const [selectedChip, setSelectedChip] = useState("All");
-
-  const getCategories = async () => {
-    try {
-      const response = await axiosInstance.get("/categories");
-      setCategories(response.data.categories);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getCategories();
-  }, [categories]);
 
   return (
     <Box justifyContent={"center"} alignItems={"center"} display={"flex"}>
-      <Typography marginRight={2}>Filter </Typography>
+      <Typography marginRight={2}>Filter by Category</Typography>
       <Stack direction="row" spacing={1}>
         <Chip
           label="All"
