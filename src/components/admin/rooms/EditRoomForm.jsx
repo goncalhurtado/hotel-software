@@ -6,20 +6,31 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
+import { LoadingButton } from "@mui/lab";
+import { editRoom } from "../../../helpers/admin/rooms";
 
 const EditRoomForm = ({ data }) => {
+  const [formData, setFormData] = useState({
+    number: data.room.number,
+    category: data.room.category._id,
+  });
+  const [loading, setLoading] = useState(false);
+
   const { room, categories } = data;
 
-  const [categorySelected, setCategorySelected] = useState("");
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  const handleChange = (event) => {
-    setCategorySelected(event.target.value);
+  const handleSubmit = async (e, formData, setLoading) => {
+    // console.log(formData);
+    await editRoom(e, formData, setLoading);
   };
 
   return (
     <>
-      <Box margin={2}>
-        <Typography textAlign={"center"}>
+      <Box margin={0}>
+        <Typography textAlign={"center"} sx={{ marginBottom: "15px" }}>
           Editing Room number {room.number}
         </Typography>
         <Grid
@@ -34,38 +45,58 @@ const EditRoomForm = ({ data }) => {
             alignItems="center"
             justifyContent="center"
           >
-            <Grid item container direction="row" justifyContent="center">
-              <TextField
-                id="filled-helperText"
-                label="Number"
-                defaultValue={room.number}
-                variant="outlined"
-                className="nameCategory"
-                name="name"
-                onChange={handleChange}
-              />
-            </Grid>
-            <Grid item container direction="row" justifyContent="start">
-              <Box
-                display={"flex"}
-                alignItems={"center"}
-                sx={{
-                  marginLeft: "10px",
-                }}
-              >
-                <InputLabel sx={{ marginRight: "5px" }}>Category</InputLabel>
+            <TextField
+              id="filled-helperText"
+              label="Number"
+              defaultValue={room.number}
+              variant="outlined"
+              // className="nameCategory"
+              name="number"
+              onChange={handleChange}
+            />
+
+            <Grid
+              item
+              container
+              direction="row"
+              justifyContent="center"
+              sx={{
+                width: "222px",
+                marginTop: "10px",
+              }}
+            >
+              <Box display={"flex"} alignItems={"center"}>
+                <InputLabel sx={{ marginRight: "5px", width: "100%" }}>
+                  Category
+                </InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  defaultValue={room.category.name}
+                  defaultValue={room.category._id}
                   onChange={handleChange}
+                  sx={{ marginRight: "5px", width: "100%" }}
+                  name="category"
                 >
                   {categories?.map((category) => (
-                    <MenuItem key={category.id} value={category.name}>
+                    <MenuItem key={category._id} value={category._id}>
                       {category.name}
                     </MenuItem>
                   ))}
                 </Select>
+              </Box>
+              <Box
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+              >
+                <LoadingButton
+                  loading={!loading ? false : true}
+                  variant="contained"
+                  sx={{ marginTop: "15px" }}
+                  onClick={handleSubmit}
+                >
+                  Edit
+                </LoadingButton>
               </Box>
             </Grid>
           </Grid>
