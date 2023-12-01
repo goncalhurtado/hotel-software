@@ -9,7 +9,7 @@ const BookingPreview = ({ selected, setSelected }) => {
   return (
     <Grid item lg={12}>
       <Card>
-        <CardContent>
+        {/* <CardContent>
           <Typography>Cantidad de Noches: </Typography>
           <Typography>
             Tipo de Habitacion:{" "}
@@ -25,7 +25,7 @@ const BookingPreview = ({ selected, setSelected }) => {
           >
             Reservar
           </Button>
-        </CardContent>
+        </CardContent> */}
       </Card>
     </Grid>
   );

@@ -12,7 +12,7 @@ const Bookings = () => {
     categories: [],
     rooms: [],
   });
-
+  console.log(availables);
   const [selected, setSelected] = useState({
     selected: false,
     category: [],
@@ -45,12 +45,12 @@ const Bookings = () => {
             <Grid container>
               <Grid item lg={8}>
                 <Grid container>
-                  {availables.categories?.map((category) => (
+                  {availables.categories.availables?.map((category) => (
                     <RoomBookingCard
                       key={category.id}
                       category={category}
                       setSelected={setSelected}
-                      availables={availables}
+                      // availables={availables}
                     />
                   ))}
                 </Grid>

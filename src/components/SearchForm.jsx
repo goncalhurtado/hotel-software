@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Box, Button } from "@mui/material";
 import SelectCapacity from "./SelectCapacity";
 import DatePickerBooking from "./DatePickerBooking";
-import { axiosInstance } from "../config/axiosInstance";
-import { getBookings } from "../helpers/booking";
+import { LoadingButton } from "@mui/lab";
+import { searchAvailableRooms } from "../helpers/createBooking";
 
-const SearchForm = ({ setAvailables, selected }) => {
+const SearchForm = ({ setAvailables, selected, setSelected }) => {
+  const [loading, setLoading] = useState(false);
   const [showDate, setShowDate] = useState(false);
   const [capacity, setCapacity] = useState(1);
 
@@ -15,14 +16,16 @@ const SearchForm = ({ setAvailables, selected }) => {
   });
 
   const handleSubmit = async () => {
-    try {
-      (selected.check_in = date.start_date),
-        (selected.check_out = date.end_date),
-        (selected.capacity = capacity),
-        await getBookings(selected, setAvailables);
-    } catch (error) {
-      console.log(error);
-    }
+    setSelected({
+      selected: true,
+      check_in: date.start_date,
+      check_out: date.end_date,
+      capacity: capacity,
+    });
+
+    const queryString = `search?check_in=${date.start_date}&check_out=${date.end_date}&capacity=${capacity}`;
+
+    searchAvailableRooms(queryString, setLoading, setAvailables);
   };
 
   return (
@@ -38,9 +41,14 @@ const SearchForm = ({ setAvailables, selected }) => {
           <SelectCapacity capacity={capacity} setCapacity={setCapacity} />
         </Box>
         <Box marginTop="10px" marginLeft="15px">
-          <Button variant="contained" onClick={handleSubmit}>
+          <LoadingButton
+            loading={!loading ? false : true}
+            variant="contained"
+            sx={{ marginTop: "15px" }}
+            onClick={handleSubmit}
+          >
             Search
-          </Button>
+          </LoadingButton>
         </Box>
       </Box>
     </>
