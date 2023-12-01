@@ -17,7 +17,6 @@ const SearchForm = ({ setAvailables, selected, setSelected }) => {
 
   const handleSubmit = async () => {
     setSelected({
-      selected: true,
       check_in: date.start_date,
       check_out: date.end_date,
       capacity: capacity,

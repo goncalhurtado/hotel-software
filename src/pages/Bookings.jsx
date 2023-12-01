@@ -47,7 +47,7 @@ const Bookings = () => {
                 <Grid container>
                   {availables.categories.availables?.map((category) => (
                     <RoomBookingCard
-                      key={category.id}
+                      key={category._id}
                       category={category}
                       setSelected={setSelected}
                       // availables={availables}
