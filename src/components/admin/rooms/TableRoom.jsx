@@ -5,8 +5,9 @@ import DataTable from "react-data-table-component";
 import FilterRoom from "./FilterRoom";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { deleteRoom } from "../../../helpers/admin/rooms";
 
-const TableRoom = ({ rooms, categories, setModal }) => {
+const TableRoom = ({ rooms, categories, setModal, getRooms }) => {
   const [roomsTable, setRoomsTable] = useState([]);
 
   const columns = [
@@ -54,7 +55,7 @@ const TableRoom = ({ rooms, categories, setModal }) => {
             color="error"
             startIcon={<DeleteIcon />}
             sx={{ marginLeft: "9px" }}
-            // onClick={(e) => handleDelete(e, row)}
+            onClick={(e) => handleDelete(e, row)}
           >
             Delete
           </Button>
@@ -62,6 +63,12 @@ const TableRoom = ({ rooms, categories, setModal }) => {
       ),
     },
   ];
+
+  const handleDelete = async (e, row) => {
+    e.preventDefault();
+    await deleteRoom(row, getRooms);
+  };
+
   useEffect(() => {
     setRoomsTable(rooms);
   }, [rooms]);

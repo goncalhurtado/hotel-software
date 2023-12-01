@@ -3,9 +3,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import EditCategoryForm from "./EditCategoryForm";
-import { axiosInstance } from "../../../config/axiosInstance";
 import { LoadingButton } from "@mui/lab";
-import Swal from "sweetalert2";
+import { updateCategory } from "../../../helpers/admin/categories";
 
 const EditCategory = ({ categoryToEdit, setEditing, getCategories }) => {
   const { name, description, capacity, price, image, _id } = categoryToEdit;
@@ -16,6 +15,7 @@ const EditCategory = ({ categoryToEdit, setEditing, getCategories }) => {
     capacity: capacity,
     price: price,
     image: image,
+    _id: _id,
   });
 
   const [newImg, setNewImg] = useState([]);
@@ -23,30 +23,7 @@ const EditCategory = ({ categoryToEdit, setEditing, getCategories }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append("name", formData.name);
-    data.append("description", formData.description);
-    data.append("capacity", formData.capacity);
-    data.append("price", formData.price);
-    data.append("image", newImg[0]);
-    setLoading(true);
-    try {
-      const response = await axiosInstance.put(`/category/${_id}`, data);
-      Swal.fire({
-        title: response.data.message,
-        icon: "success",
-        confirmButtonColor: "#3f50b5",
-      });
-      setEditing(false);
-      getCategories();
-    } catch (error) {
-      Swal.fire({
-        title: error.response.data.message || error.message,
-        icon: "error",
-        confirmButtonColor: "#d33",
-      });
-      setLoading(false);
-    }
+    updateCategory(formData, getCategories, setLoading, setEditing, newImg);
   };
 
   return (

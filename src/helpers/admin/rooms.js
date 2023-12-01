@@ -1,39 +1,77 @@
-import Swal from "sweetalert2";
 import { axiosInstance } from "../../config/axiosInstance";
+import Swal from "sweetalert2";
 
-export const editRoom = async(e, formData, setLoading, setError) => {
+export const createRoom = async(e, formData, setLoading, setError, getRooms) => {
     e.preventDefault();
-    // console.log(formData);
-    const data = new FormData();
-    data.append("number", formData.number);
-    data.append("category", formData.category);
     setLoading(true);
-
+    console.log(formData);
     try {
-        const response = await axiosInstance.put(`/roomasdas`, data);
-        Swal.fire({
-            title: response.data.message,
-            icon: "success",
-            confirmButtonColor: "#3f50b5",
-        });
+        const response = await axiosInstance.post(`/room`, formData);
+        setError({
+            status: false,
+            message: response.data.message
+        })
+        setLoading(false);
+        getRooms();
 
-        // setCreating(false);
-        // getCategories();
-        // console.log(data);
     } catch (error) {
-        console.log(error);
-        Swal.fire({
-            title: error.response.data.message || error.message,
-            icon: "error",
-            confirmButtonColor: "#d33",
-        });
-
 
         setError({
             status: true,
             message: error.response.data.message || error.message
         })
-
         setLoading(false);
+
+    }
+}
+
+
+export const updateRoom = async(e, formData, setLoading, setError, getRooms) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+        const response = await axiosInstance.put(`/room/${formData.id}`, formData);
+        setError({
+            status: false,
+            message: response.data.message
+        })
+        setLoading(false);
+        getRooms();
+
+    } catch (error) {
+
+        setError({
+            status: true,
+            message: error.response.data.message || error.message
+        })
+        setLoading(false);
+
     }
 };
+
+
+
+
+export const deleteRoom = async(row, getRooms) => {
+
+
+    Swal.fire({
+            title: `Do you want to delete room ${row.number} ?`,
+            showCancelButton: true,
+            confirmButtonText: "Delete",
+        })
+        .then(async(result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await axiosInstance.delete(`/room/${row._id}`);
+                    Swal.fire(`${response.data.message}`, ``, "success");
+                    getRooms();
+                } catch (error) {
+                    const errorMessage = error.response.data.message || error.message;
+                    Swal.fire(`${errorMessage}`, ``, "error");
+                }
+            }
+        });
+
+}

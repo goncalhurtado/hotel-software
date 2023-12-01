@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { axiosInstance } from "../../../config/axiosInstance";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { LoadingButton } from "@mui/lab";
-import Swal from "sweetalert2";
 import CreateCategoryForm from "./CreateCategoryForm";
+import { createCategory } from "../../../helpers/admin/categories";
 
 const CreateCategory = ({ setCreating, getCategories }) => {
   const [loading, setLoading] = useState(false);
@@ -20,33 +19,8 @@ const CreateCategory = ({ setCreating, getCategories }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append("name", formData.name);
-    data.append("description", formData.description);
-    data.append("capacity", formData.capacity);
-    data.append("price", formData.price);
-    data.append("image", newImg[0]);
-    setLoading(true);
 
-    try {
-      const response = await axiosInstance.post(`/category`, data);
-      Swal.fire({
-        title: response.data.message,
-        icon: "success",
-        confirmButtonColor: "#3f50b5",
-      });
-
-      setCreating(false);
-      getCategories();
-    } catch (error) {
-      console.log(error);
-      Swal.fire({
-        title: error.response.data.message || error.message,
-        icon: "error",
-        confirmButtonColor: "#d33",
-      });
-      setLoading(false);
-    }
+    createCategory(formData, getCategories, setLoading, setCreating, newImg);
   };
 
   return (

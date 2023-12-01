@@ -6,7 +6,7 @@ import Modal from "@mui/material/Modal";
 import CreateRoomForm from "./CreateRoomForm";
 import EditRoomForm from "./EditRoomForm";
 
-const ModalRoom = ({ modal, setModal }) => {
+const ModalRoom = ({ modal, setModal, getRooms }) => {
   const style = {
     position: "absolute",
     top: "50%",
@@ -18,9 +18,18 @@ const ModalRoom = ({ modal, setModal }) => {
     boxShadow: 24,
     p: 4,
   };
-
-  const handleClose = () => setModal({ state: false, action: "", data: "" });
-
+  const handleClose = () => {
+    setModal((prevModal) => ({
+      ...prevModal,
+      state: false,
+      action: "",
+      data: {
+        ...prevModal.data,
+        room: "",
+      },
+    }));
+  };
+  // console.log(modal);
   return (
     <div>
       <Modal
@@ -30,8 +39,12 @@ const ModalRoom = ({ modal, setModal }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {modal.action === "create" && <CreateRoomForm />}
-          {modal.action === "edit" && <EditRoomForm data={modal.data} />}
+          {modal.action === "create" && (
+            <CreateRoomForm modal={modal} getRooms={getRooms} />
+          )}
+          {modal.action === "edit" && (
+            <EditRoomForm data={modal.data} getRooms={getRooms} />
+          )}
         </Box>
       </Modal>
     </div>

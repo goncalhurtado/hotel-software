@@ -16,7 +16,7 @@ const AdminRooms = () => {
   const [modal, setModal] = useState({
     state: false,
     action: "",
-    data: "",
+    data: { room: "", categories: "" },
   });
 
   const getRooms = async () => {
@@ -40,6 +40,11 @@ const AdminRooms = () => {
   useEffect(() => {
     getRooms();
     getCategories();
+    setModal({
+      state: false,
+      action: "",
+      data: { room: "", categories: categories },
+    });
   }, []);
 
   return (
@@ -57,14 +62,19 @@ const AdminRooms = () => {
           }}
           variant="contained"
           onClick={() => {
-            setModal({ state: true, action: "create", data: "" });
+            setModal({ state: true, action: "create", data: categories });
           }}
         >
           create room
         </Button>
       </Box>
-      <TableRoom rooms={rooms} categories={categories} setModal={setModal} />
-      <ModalRoom modal={modal} setModal={setModal} />
+      <TableRoom
+        rooms={rooms}
+        getRooms={getRooms}
+        categories={categories}
+        setModal={setModal}
+      />
+      <ModalRoom modal={modal} setModal={setModal} getRooms={getRooms} />
     </>
   );
 };
