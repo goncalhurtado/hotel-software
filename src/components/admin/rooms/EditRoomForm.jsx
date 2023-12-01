@@ -6,7 +6,7 @@ import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
 import { LoadingButton } from "@mui/lab";
-import { editRoom } from "../../../helpers/admin/rooms";
+import { updateRoom } from "../../../helpers/admin/rooms";
 
 const EditRoomForm = ({ data, getRooms }) => {
   const [formData, setFormData] = useState({
@@ -28,7 +28,7 @@ const EditRoomForm = ({ data, getRooms }) => {
   };
 
   const handleSubmit = async (e, formData, setLoading) => {
-    await editRoom(e, formData, setLoading, setError, getRooms);
+    await updateRoom(e, formData, setLoading, setError, getRooms);
   };
 
   return (

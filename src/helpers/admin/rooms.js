@@ -1,30 +1,6 @@
 import { axiosInstance } from "../../config/axiosInstance";
 import Swal from "sweetalert2";
 
-export const editRoom = async(e, formData, setLoading, setError, getRooms) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-        const response = await axiosInstance.put(`/room/${formData.id}`, formData);
-        setError({
-            status: false,
-            message: response.data.message
-        })
-        setLoading(false);
-        getRooms();
-
-    } catch (error) {
-
-        setError({
-            status: true,
-            message: error.response.data.message || error.message
-        })
-        setLoading(false);
-
-    }
-};
-
 export const createRoom = async(e, formData, setLoading, setError, getRooms) => {
     e.preventDefault();
     setLoading(true);
@@ -48,6 +24,34 @@ export const createRoom = async(e, formData, setLoading, setError, getRooms) => 
 
     }
 }
+
+
+export const updateRoom = async(e, formData, setLoading, setError, getRooms) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+        const response = await axiosInstance.put(`/room/${formData.id}`, formData);
+        setError({
+            status: false,
+            message: response.data.message
+        })
+        setLoading(false);
+        getRooms();
+
+    } catch (error) {
+
+        setError({
+            status: true,
+            message: error.response.data.message || error.message
+        })
+        setLoading(false);
+
+    }
+};
+
+
+
 
 export const deleteRoom = async(row, getRooms) => {
 

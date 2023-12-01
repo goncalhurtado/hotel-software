@@ -6,7 +6,8 @@ import EditCategory from "../../components/admin/categories/EditCategory";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CreateCategory from "../../components/admin/categories/CreateCategory";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
+import { deleteCategory } from "../../helpers/admin/categories";
 
 const AdminCategories = () => {
   const [categories, setCategories] = useState([]);
@@ -44,22 +45,7 @@ const AdminCategories = () => {
 
   const handleDelete = async (e, row) => {
     e.preventDefault();
-    Swal.fire({
-      title: `Do you want to delete ${row.name} category?`,
-      showCancelButton: true,
-      confirmButtonText: "Delete",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          const response = await axiosInstance.delete(`/category/${row._id}`);
-          Swal.fire(`${response.data.message}`, ``, "success");
-          getCategories();
-        } catch (error) {
-          const errorMessage = error.response.data.message || error.message;
-          Swal.fire(`${errorMessage}`, ``, "error");
-        }
-      }
-    });
+    deleteCategory(row, getCategories);
   };
 
   // Get Categories
