@@ -18,9 +18,18 @@ const ModalRoom = ({ modal, setModal, getRooms }) => {
     boxShadow: 24,
     p: 4,
   };
-
-  const handleClose = () => setModal({ state: false, action: "", data: "" });
-
+  const handleClose = () => {
+    setModal((prevModal) => ({
+      ...prevModal,
+      state: false,
+      action: "",
+      data: {
+        ...prevModal.data,
+        room: "",
+      },
+    }));
+  };
+  // console.log(modal);
   return (
     <div>
       <Modal
@@ -30,7 +39,9 @@ const ModalRoom = ({ modal, setModal, getRooms }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {modal.action === "create" && <CreateRoomForm />}
+          {modal.action === "create" && (
+            <CreateRoomForm modal={modal} getRooms={getRooms} />
+          )}
           {modal.action === "edit" && (
             <EditRoomForm data={modal.data} getRooms={getRooms} />
           )}
