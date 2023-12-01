@@ -6,6 +6,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControl from "@mui/material/FormControl";
 import { LoadingButton } from "@mui/lab";
 import { editRoom } from "../../../helpers/admin/rooms";
 
@@ -15,92 +17,104 @@ const EditRoomForm = ({ data }) => {
     category: data.room.category._id,
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({
+    state: false,
+    message: "",
+  });
 
   const { room, categories } = data;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError({ state: false, message: "" });
   };
 
   const handleSubmit = async (e, formData, setLoading) => {
-    // console.log(formData);
-    await editRoom(e, formData, setLoading);
+    await editRoom(e, formData, setLoading, setError);
   };
 
   return (
     <>
-      <Box margin={0}>
-        <Typography textAlign={"center"} sx={{ marginBottom: "15px" }}>
-          Editing Room number {room.number}
-        </Typography>
-        <Grid
-          container
-          direction="column"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Grid
-            container
-            direction="column"
+      <Box
+        display={"flex"}
+        flexDirection={"column"}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <FormControl error={error.status}>
+          <Box
+            display={"flex"}
+            flexDirection={"column"}
             alignItems="center"
             justifyContent="center"
           >
+            <Typography
+              textAlign={"center"}
+              sx={{ marginBottom: "15px" }}
+              variant="h6"
+            >
+              Editing Room number {room.number}
+            </Typography>
             <TextField
-              id="filled-helperText"
               label="Number"
               defaultValue={room.number}
-              variant="outlined"
-              // className="nameCategory"
               name="number"
               onChange={handleChange}
+              error={error.status}
+              sx={{ marginBottom: "15px" }}
             />
-
-            <Grid
-              item
-              container
-              direction="row"
+            <Box
+              display={"flex"}
+              alignItems={"center"}
               justifyContent="center"
-              sx={{
-                width: "222px",
-                marginTop: "10px",
-              }}
+              marginBottom={1}
             >
-              <Box display={"flex"} alignItems={"center"}>
-                <InputLabel sx={{ marginRight: "5px", width: "100%" }}>
-                  Category
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  defaultValue={room.category._id}
-                  onChange={handleChange}
-                  sx={{ marginRight: "5px", width: "100%" }}
-                  name="category"
-                >
-                  {categories?.map((category) => (
-                    <MenuItem key={category._id} value={category._id}>
-                      {category.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </Box>
-              <Box
-                display={"flex"}
-                justifyContent={"center"}
-                alignItems={"center"}
+              <Typography
+                sx={{ marginRight: "5px", width: "100%" }}
+                variant="subtitle1"
               >
-                <LoadingButton
-                  loading={!loading ? false : true}
-                  variant="contained"
-                  sx={{ marginTop: "15px" }}
-                  onClick={handleSubmit}
-                >
-                  Edit
-                </LoadingButton>
-              </Box>
-            </Grid>
-          </Grid>
-        </Grid>
+                Category
+              </Typography>
+              <Select
+                defaultValue={room.category._id}
+                onChange={handleChange}
+                sx={{ marginRight: "5px", width: "100%" }}
+                name="category"
+                error={error.status}
+              >
+                {categories?.map((category) => (
+                  <MenuItem key={category._id} value={category._id}>
+                    {category.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </Box>
+            <Box
+              display={"flex"}
+              flexDirection={"column"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  height: "20px",
+                  color: error.status === true ? "red" : "green",
+                }}
+              >
+                {error.menssage}
+              </Typography>
+              <LoadingButton
+                loading={!loading ? false : true}
+                variant="contained"
+                sx={{ marginTop: "15px" }}
+                onClick={(e) => handleSubmit(e, formData, setLoading)}
+              >
+                Edit
+              </LoadingButton>
+            </Box>
+          </Box>
+        </FormControl>
       </Box>
     </>
   );
