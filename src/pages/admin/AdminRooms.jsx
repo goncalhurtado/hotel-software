@@ -64,7 +64,7 @@ const AdminRooms = () => {
         </Button>
       </Box>
       <TableRoom rooms={rooms} categories={categories} setModal={setModal} />
-      <ModalRoom modal={modal} setModal={setModal} />
+      <ModalRoom modal={modal} setModal={setModal} getRooms={getRooms} />
     </>
   );
 };

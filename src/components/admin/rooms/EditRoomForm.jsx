@@ -11,8 +11,9 @@ import FormControl from "@mui/material/FormControl";
 import { LoadingButton } from "@mui/lab";
 import { editRoom } from "../../../helpers/admin/rooms";
 
-const EditRoomForm = ({ data }) => {
+const EditRoomForm = ({ data, getRooms }) => {
   const [formData, setFormData] = useState({
+    id: data.room._id,
     number: data.room.number,
     category: data.room.category._id,
   });
@@ -30,7 +31,7 @@ const EditRoomForm = ({ data }) => {
   };
 
   const handleSubmit = async (e, formData, setLoading) => {
-    await editRoom(e, formData, setLoading, setError);
+    await editRoom(e, formData, setLoading, setError, getRooms);
   };
 
   return (
@@ -59,6 +60,7 @@ const EditRoomForm = ({ data }) => {
               label="Number"
               defaultValue={room.number}
               name="number"
+              type="number"
               onChange={handleChange}
               error={error.status}
               sx={{ marginBottom: "15px" }}
@@ -102,7 +104,7 @@ const EditRoomForm = ({ data }) => {
                   color: error.status === true ? "red" : "green",
                 }}
               >
-                {error.menssage}
+                {error.message}
               </Typography>
               <LoadingButton
                 loading={!loading ? false : true}

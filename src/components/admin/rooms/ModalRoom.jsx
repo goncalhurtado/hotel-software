@@ -6,7 +6,7 @@ import Modal from "@mui/material/Modal";
 import CreateRoomForm from "./CreateRoomForm";
 import EditRoomForm from "./EditRoomForm";
 
-const ModalRoom = ({ modal, setModal }) => {
+const ModalRoom = ({ modal, setModal, getRooms }) => {
   const style = {
     position: "absolute",
     top: "50%",
@@ -31,7 +31,9 @@ const ModalRoom = ({ modal, setModal }) => {
       >
         <Box sx={style}>
           {modal.action === "create" && <CreateRoomForm />}
-          {modal.action === "edit" && <EditRoomForm data={modal.data} />}
+          {modal.action === "edit" && (
+            <EditRoomForm data={modal.data} getRooms={getRooms} />
+          )}
         </Box>
       </Modal>
     </div>
