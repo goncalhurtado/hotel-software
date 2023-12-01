@@ -11,7 +11,7 @@ export const searchAvailableRooms = async(queryString, setLoading, setAvailables
 
 
         const response = await axiosInstance.get(`/bookings/${queryString}`);
-        console.log(response.data);
+
         setLoading(false);
 
 

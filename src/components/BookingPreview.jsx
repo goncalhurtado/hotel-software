@@ -6,7 +6,6 @@ import Grid from "@mui/material/Grid";
 import { Box, Button } from "@mui/material";
 
 const BookingPreview = ({ selected, setSelected }) => {
-  console.log(selected);
   return (
     <Grid item lg={12}>
       <Card>

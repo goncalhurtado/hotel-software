@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 export const createRoom = async(e, formData, setLoading, setError, getRooms) => {
     e.preventDefault();
     setLoading(true);
-    console.log(formData);
+
     try {
         const response = await axiosInstance.post(`/room`, formData);
         setError({
