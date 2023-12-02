@@ -6,7 +6,7 @@ import { Box, Button } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import Grid from "@mui/material/Grid";
 
-const RoomBookingCard = ({ category, setSelected }) => {
+const RoomBookingCardSoldOut = ({ category }) => {
   return (
     <Grid item xs={12} sm={12} md={12} lg={12}>
       <Card sx={{ maxWidth: 800, marginBottom: "20px" }}>
@@ -29,8 +29,9 @@ const RoomBookingCard = ({ category, setSelected }) => {
                     category: category,
                   }))
                 }
+                disabled={true}
               >
-                Seleccionar
+                Sold Out
               </Button>
             </Box>
           </Box>
@@ -40,4 +41,4 @@ const RoomBookingCard = ({ category, setSelected }) => {
   );
 };
 
-export default RoomBookingCard;
+export default RoomBookingCardSoldOut;

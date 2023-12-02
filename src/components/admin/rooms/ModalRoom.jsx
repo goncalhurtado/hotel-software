@@ -29,7 +29,7 @@ const ModalRoom = ({ modal, setModal, getRooms }) => {
       },
     }));
   };
-  // console.log(modal);
+
   return (
     <div>
       <Modal

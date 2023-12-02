@@ -21,8 +21,6 @@ const CreateRoomForm = ({ getRooms, modal }) => {
     message: "",
   });
 
-  // console.log(formData);
-  // console.log(modal.data);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setError({ state: false, message: "" });

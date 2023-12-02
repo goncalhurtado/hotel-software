@@ -6,13 +6,14 @@ import RoomBookingCard from "../components/RoomBookingCard";
 import Grid from "@mui/material/Grid";
 import BookingPreview from "../components/BookingPreview";
 import Reservation from "../components/Reservation";
+import RoomBookingCardSoldOut from "../components/RoomBookingCardSoldOut";
 
 const Bookings = () => {
   const [availables, setAvailables] = useState({
     categories: [],
-    rooms: [],
+    rooms: [], //rooms solo para poder confirmar las reservas restantes, despues lo puedo eliminar
   });
-
+  console.log(availables);
   const [selected, setSelected] = useState({
     selected: false,
     category: [],
@@ -45,12 +46,18 @@ const Bookings = () => {
             <Grid container>
               <Grid item lg={8}>
                 <Grid container>
-                  {availables.categories?.map((category) => (
+                  {availables.categories.availables?.map((category) => (
                     <RoomBookingCard
-                      key={category.id}
+                      key={category._id}
                       category={category}
                       setSelected={setSelected}
-                      availables={availables}
+                      // availables={availables}
+                    />
+                  ))}
+                  {availables.categories.soldout?.map((category) => (
+                    <RoomBookingCardSoldOut
+                      key={category._id}
+                      category={category}
                     />
                   ))}
                 </Grid>

@@ -2,10 +2,21 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
-import { setBooking } from "../helpers/booking";
-import { axiosInstance } from "../config/axiosInstance";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import { arrivalTimes } from "../helpers/information";
+import { LoadingButton } from "@mui/lab";
+import { postBooking } from "../helpers/booking";
 
 const BookingForm = ({ selected }) => {
+  const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState({
+  //   status: false,
+  //   message: "",
+  //   type: "",
+  // });
   const [formData, setFormData] = useState({
     info: {
       firstName: "",
@@ -13,11 +24,15 @@ const BookingForm = ({ selected }) => {
       phone: "",
       email: "",
       country: "",
-      passaport: "",
+      passportType: "",
+      passport: "",
       arrivalTime: "",
+      paymentMethod: "",
       additionalComments: "",
+      paymentMethod: "",
+      price: selected.category.price,
     },
-    selectedCategory: selected.category.id,
+    category: selected.category._id,
     check_in: selected.check_in,
     check_out: selected.check_out,
   });
@@ -30,12 +45,20 @@ const BookingForm = ({ selected }) => {
         ...prevData.info,
         [name]: value,
       },
+      category: selected.category._id,
+      check_in: selected.check_in,
+      check_out: selected.check_out,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const reservation = setBooking(formData);
+
+    // console.log(formData);
+
+    postBooking(formData, setLoading);
+
+    // const reservation = setBooking(formData);
 
     // try {
     //   const response = await axiosInstance.post("/booking", reservation);
@@ -57,64 +80,107 @@ const BookingForm = ({ selected }) => {
         onSubmit={handleSubmit}
       >
         <TextField
-          id="outlined-basic"
-          label="Nombre"
+          type="text"
+          label="First Name"
           variant="outlined"
           name="firstName"
           onChange={handleChange}
         />
         <TextField
-          id="outlined-basic"
-          label="Apellido"
+          type="text"
+          label="Last Name"
           variant="outlined"
           name="lastName"
           onChange={handleChange}
         />
         <TextField
-          id="outlined-basic"
-          label="Telefono"
+          type="phone"
+          label="Phone"
           variant="outlined"
           name="phone"
           onChange={handleChange}
         />
         <TextField
-          id="outlined-basic"
-          label="Correo Electrónico"
+          type="email"
+          label="Email"
           variant="outlined"
           name="email"
           onChange={handleChange}
         />
         <TextField
-          id="outlined-basic"
-          label="Pais de Origen"
+          type="adress"
+          label="Country of Origin"
           variant="outlined"
           name="country"
           onChange={handleChange}
         />
+        <FormControl variant="outlined">
+          <InputLabel>Passport Type</InputLabel>
+          <Select
+            value={formData.info.passportType}
+            onChange={handleChange}
+            label="Passport Type"
+            name="passportType"
+          >
+            <MenuItem value="Dni">Dni</MenuItem>
+            <MenuItem value="Passport">Passport</MenuItem>
+          </Select>
+        </FormControl>
+
         <TextField
-          id="outlined-basic"
-          label="Tipo de documento"
+          type="number"
+          label="Number"
           variant="outlined"
-          name="passaport"
+          name="passport"
           onChange={handleChange}
         />
+
+        <FormControl variant="outlined">
+          <InputLabel>Estimated Arrival Time</InputLabel>
+          <Select
+            label="Estimated Arrival Time"
+            variant="outlined"
+            name="arrivalTime"
+            onChange={handleChange}
+            value={formData.info.arrivalTime}
+          >
+            {arrivalTimes?.map((time) => (
+              <MenuItem key={time.id} value={time.time}>
+                {time.time}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <FormControl variant="outlined">
+          <InputLabel>Payment Method</InputLabel>
+          <Select
+            label="Payment Method"
+            value={formData.info.paymentMethod}
+            onChange={handleChange}
+            name="paymentMethod"
+          >
+            <MenuItem value="Transfer">Transfer</MenuItem>
+            <MenuItem disabled value="Credit Card">
+              Credit Card
+            </MenuItem>
+          </Select>
+        </FormControl>
         <TextField
-          id="outlined-basic"
-          label="Hora prevista de llegada"
-          variant="outlined"
-          name="arrivalTime"
-          onChange={handleChange}
-        />
-        <TextField
-          id="outlined-basic"
-          label="Comentarios adicionales"
+          label="Additional Comments"
           variant="outlined"
           name="additionalComments"
           onChange={handleChange}
         />
-        <Button variant="contained" type="submit">
-          Reservar
-        </Button>
+
+        <LoadingButton
+          loading={!loading ? false : true}
+          variant="contained"
+          sx={{ marginTop: "15px" }}
+          onClick={handleSubmit}
+        >
+          Book
+        </LoadingButton>
       </Box>
     </>
   );
