@@ -10,7 +10,7 @@ import Reservation from "../components/Reservation";
 const Bookings = () => {
   const [availables, setAvailables] = useState({
     categories: [],
-    rooms: [],
+    rooms: [], //rooms solo para poder confirmar las reservas restantes, despues lo puedo eliminar
   });
   console.log(availables);
   const [selected, setSelected] = useState({

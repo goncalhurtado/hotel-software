@@ -1,5 +1,6 @@
 export const arrivalTimes = [
-    //
+    //,
+
     {
         id: 8,
         time: "15:00"

@@ -7,8 +7,16 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import { arrivalTimes } from "../helpers/information";
+import { LoadingButton } from "@mui/lab";
+import { postBooking } from "../helpers/booking";
 
 const BookingForm = ({ selected }) => {
+  const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState({
+  //   status: false,
+  //   message: "",
+  //   type: "",
+  // });
   const [formData, setFormData] = useState({
     info: {
       firstName: "",
@@ -16,13 +24,15 @@ const BookingForm = ({ selected }) => {
       phone: "",
       email: "",
       country: "",
-      passportType: "Dni",
+      passportType: "",
       passport: "",
-      arrivalTime: "15:00",
-      paymentMethod: "Transfer",
+      arrivalTime: "",
+      paymentMethod: "",
       additionalComments: "",
+      paymentMethod: "",
+      price: selected.category.price,
     },
-    selectedCategory: selected.category.id,
+    category: selected.category._id,
     check_in: selected.check_in,
     check_out: selected.check_out,
   });
@@ -35,13 +45,19 @@ const BookingForm = ({ selected }) => {
         ...prevData.info,
         [name]: value,
       },
+      category: selected.category._id,
+      check_in: selected.check_in,
+      check_out: selected.check_out,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(formData);
+    // console.log(formData);
+
+    postBooking(formData, setLoading);
+
     // const reservation = setBooking(formData);
 
     // try {
@@ -101,7 +117,7 @@ const BookingForm = ({ selected }) => {
         <FormControl variant="outlined">
           <InputLabel>Passport Type</InputLabel>
           <Select
-            value="Dni"
+            value={formData.info.passportType}
             onChange={handleChange}
             label="Passport Type"
             name="passportType"
@@ -113,7 +129,7 @@ const BookingForm = ({ selected }) => {
 
         <TextField
           type="number"
-          label="ID Number"
+          label="Number"
           variant="outlined"
           name="passport"
           onChange={handleChange}
@@ -126,7 +142,7 @@ const BookingForm = ({ selected }) => {
             variant="outlined"
             name="arrivalTime"
             onChange={handleChange}
-            value="15:00"
+            value={formData.info.arrivalTime}
           >
             {arrivalTimes?.map((time) => (
               <MenuItem key={time.id} value={time.time}>
@@ -140,7 +156,7 @@ const BookingForm = ({ selected }) => {
           <InputLabel>Payment Method</InputLabel>
           <Select
             label="Payment Method"
-            value="Transfer"
+            value={formData.info.paymentMethod}
             onChange={handleChange}
             name="paymentMethod"
           >
@@ -156,9 +172,15 @@ const BookingForm = ({ selected }) => {
           name="additionalComments"
           onChange={handleChange}
         />
-        <Button variant="contained" type="submit">
+
+        <LoadingButton
+          loading={!loading ? false : true}
+          variant="contained"
+          sx={{ marginTop: "15px" }}
+          onClick={handleSubmit}
+        >
           Book
-        </Button>
+        </LoadingButton>
       </Box>
     </>
   );
