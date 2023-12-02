@@ -6,6 +6,7 @@ import RoomBookingCard from "../components/RoomBookingCard";
 import Grid from "@mui/material/Grid";
 import BookingPreview from "../components/BookingPreview";
 import Reservation from "../components/Reservation";
+import RoomBookingCardSoldOut from "../components/RoomBookingCardSoldOut";
 
 const Bookings = () => {
   const [availables, setAvailables] = useState({
@@ -51,6 +52,12 @@ const Bookings = () => {
                       category={category}
                       setSelected={setSelected}
                       // availables={availables}
+                    />
+                  ))}
+                  {availables.categories.soldout?.map((category) => (
+                    <RoomBookingCardSoldOut
+                      key={category._id}
+                      category={category}
                     />
                   ))}
                 </Grid>
