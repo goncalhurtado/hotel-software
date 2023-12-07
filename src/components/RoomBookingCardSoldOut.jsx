@@ -12,7 +12,20 @@ const RoomBookingCardSoldOut = ({ category }) => {
       <Card sx={{ maxWidth: 800, marginBottom: "20px" }}>
         <CardContent>
           <Box display="flex">
-            <Box>imagen</Box>
+            <Box>
+              <Box
+                sx={{
+                  height: 233,
+                  width: 350,
+                  maxHeight: { xs: 233, md: 167 },
+                  maxWidth: { xs: 350, md: 250 },
+                  marginRight: "20px",
+                }}
+                component="img"
+                alt={category.name}
+                src={category.image}
+              />
+            </Box>
             <Box>
               <Typography gutterBottom variant="h5" component="div">
                 {category.name}
