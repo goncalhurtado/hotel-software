@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
@@ -10,13 +9,8 @@ import { arrivalTimes } from "../helpers/information";
 import { LoadingButton } from "@mui/lab";
 import { postBooking } from "../helpers/booking";
 
-const BookingForm = ({ selected }) => {
+const BookingForm = ({ selected, setSuccessInfo }) => {
   const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState({
-  //   status: false,
-  //   message: "",
-  //   type: "",
-  // });
   const [formData, setFormData] = useState({
     info: {
       firstName: "",
@@ -29,7 +23,7 @@ const BookingForm = ({ selected }) => {
       arrivalTime: "",
       paymentMethod: "",
       additionalComments: "",
-      paymentMethod: "",
+      paymentStatus: "pending",
       price: selected.category.price,
     },
     category: selected.category._id,
@@ -53,19 +47,7 @@ const BookingForm = ({ selected }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // console.log(formData);
-
-    postBooking(formData, setLoading);
-
-    // const reservation = setBooking(formData);
-
-    // try {
-    //   const response = await axiosInstance.post("/booking", reservation);
-    //   console.log("Reserva agregada:", response.data);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    postBooking(formData, setLoading, setSuccessInfo);
   };
 
   return (

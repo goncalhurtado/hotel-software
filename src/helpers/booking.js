@@ -3,7 +3,7 @@ import { axiosInstance } from "../config/axiosInstance"
 import Swal from "sweetalert2";
 
 
-export const postBooking = async(formData, setLoading) => {
+export const postBooking = async(formData, setLoading, setSuccessInfo) => {
 
     setLoading(true)
     try {
@@ -16,6 +16,14 @@ export const postBooking = async(formData, setLoading) => {
             confirmButtonText: "Ok",
         });
         console.log(response);
+        const { savedBooking } = response.data;
+        setSuccessInfo({
+            status: true,
+            bookingId: savedBooking.bookingId,
+            firstName: savedBooking.info.firstName,
+            email: savedBooking.info.email,
+        });
+
 
     } catch (error) {
         setLoading(false);
