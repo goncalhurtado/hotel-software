@@ -1,17 +1,13 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import DataTable from "react-data-table-component";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
-import { dateFormater } from "../../../helpers/admin/adminBookings";
-import DeleteIcon from "@mui/icons-material/Delete";
+import React, { useEffect, useState } from "react";
 import { IconButton } from "@mui/material";
-import CircularProgress from "@mui/material/CircularProgress";
+import { dateFormater } from "../../../helpers/admin/adminBookings";
+import DataTable from "react-data-table-component";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import TableSkeleton from "../../skeletons/TableSkeleton";
-import Skeleton from "@mui/material/Skeleton";
 
-const TableBookings = ({ bookings }) => {
+const TableBookings = ({ bookings, setModal }) => {
   const [bookingsTable, setBookingsTable] = useState([]);
   const columns = [
     {
@@ -39,7 +35,10 @@ const TableBookings = ({ bookings }) => {
             </p>
             <p>{row.info.email}</p>
           </div>
-          <div>
+          <div
+            style={{ cursor: "pointer" }}
+            onClick={() => setModal({ action: true, data: row.info })}
+          >
             <InfoOutlinedIcon sx={{ ml: 1 }} />
           </div>
         </div>
