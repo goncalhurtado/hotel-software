@@ -25,14 +25,14 @@ const EditBooking = ({ editing, setEditing }) => {
           <Button
             variant="outlined"
             sx={{ marginLeft: "10px" }}
-            onClick={() => setEditing(false)}
+            onClick={() => setEditing({ action: false })}
           >
             return
           </Button>
         </Box>
 
         <Box>
-          <EditGuestForm />
+          <EditGuestForm editing={editing} />
         </Box>
         <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
           <LoadingButton
