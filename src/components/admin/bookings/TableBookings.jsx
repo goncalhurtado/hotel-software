@@ -137,7 +137,6 @@ const TableBookings = ({ bookings, getBookings, setModal, setEditing }) => {
 
   return (
     <>
-      TableBookings
       <DataTable
         data={bookingsTable}
         columns={columns}
