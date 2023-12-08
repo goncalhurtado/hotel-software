@@ -1,4 +1,3 @@
-import { fi } from "date-fns/locale";
 import { axiosInstance } from "../config/axiosInstance"
 import Swal from "sweetalert2";
 
@@ -34,8 +33,27 @@ export const postBooking = async(formData, setLoading, setSuccessInfo) => {
             icon: "error",
             confirmButtonText: "Ok",
         });
-        // return error.response.data.message || error.message;
 
+
+    }
+
+}
+
+export const searchAvailableRooms = async(queryString, setLoading, setAvailables) => {
+    setLoading(true);
+
+    try {
+        const response = await axiosInstance.get(`/bookings/${queryString}`);
+
+        setLoading(false);
+        setAvailables({
+            categories: response.data.categories,
+            rooms: response.data.availablesRooms
+        })
+
+    } catch (error) {
+        console.log(error);
+        setLoading(false);
     }
 
 }

@@ -3,7 +3,7 @@ import { Box, Button } from "@mui/material";
 import SelectCapacity from "./SelectCapacity";
 import DatePickerBooking from "./DatePickerBooking";
 import { LoadingButton } from "@mui/lab";
-import { searchAvailableRooms } from "../helpers/createBooking";
+import { searchAvailableRooms } from "../helpers/booking";
 
 const SearchForm = ({ setAvailables, selected, setSelected }) => {
   const [loading, setLoading] = useState(false);
