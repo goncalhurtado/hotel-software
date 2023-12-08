@@ -8,7 +8,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import TableSkeleton from "../../skeletons/TableSkeleton";
 import Box from "@mui/material/Box";
 
-const TableBookings = ({ bookings, setModal }) => {
+const TableBookings = ({ bookings, setModal, setEditing }) => {
   const [bookingsTable, setBookingsTable] = useState([]);
   const columns = [
     {
@@ -113,15 +113,14 @@ const TableBookings = ({ bookings, setModal }) => {
       name: "",
       //
       cell: (row) => (
-        <div>
-          <IconButton>
+        <Box>
+          <IconButton onClick={() => setEditing({ status: true, data: row })}>
             <EditNoteOutlinedIcon />
           </IconButton>
-
           <IconButton color="error">
             <DeleteIcon />
           </IconButton>
-        </div>
+        </Box>
       ),
     },
   ];

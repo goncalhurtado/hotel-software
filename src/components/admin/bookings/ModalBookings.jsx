@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import GuestInfo from "./GuestInfo";
 const ModalBookings = ({ setModal, modal }) => {
-  console.log(modal.data);
   const style = {
     position: "absolute",
     top: "50%",
@@ -26,12 +25,6 @@ const ModalBookings = ({ setModal, modal }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          {/* {modal.action === "create" && (
-                <CreateRoomForm modal={modal} getRooms={getRooms} />
-              )}
-              {modal.action === "edit" && (
-                <EditRoomForm data={modal.data} getRooms={getRooms} />
-              )} */}
           <GuestInfo data={modal.data} />
         </Box>
       </Modal>
