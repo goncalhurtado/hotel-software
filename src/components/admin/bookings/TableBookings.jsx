@@ -3,7 +3,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 import DataTable from "react-data-table-component";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import { dateFormater } from "../../../helpers/admin/adminBookings";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { IconButton } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import TableSkeleton from "../../skeletons/TableSkeleton";
+import Skeleton from "@mui/material/Skeleton";
 
 const TableBookings = ({ bookings }) => {
   const [bookingsTable, setBookingsTable] = useState([]);
@@ -70,19 +76,30 @@ const TableBookings = ({ bookings }) => {
       width: "110px",
     },
     {
+      name: "Room",
+      selector: (row) => row.room.number,
+      sortable: true,
+      width: "80px",
+    },
+    {
       name: "Payment Status",
       selector: (row) => row.info.paymentStatus,
       sortable: true,
     },
     {
-      name: "Actions",
+      name: "",
+      //
       cell: (row) => (
         <div>
-          <button>View</button>
-          <button>Cancel</button>
+          <IconButton>
+            <EditNoteOutlinedIcon />
+          </IconButton>
+
+          <IconButton color="error">
+            <DeleteIcon />
+          </IconButton>
         </div>
       ),
-      sortable: true,
     },
   ];
 
@@ -98,6 +115,7 @@ const TableBookings = ({ bookings }) => {
         columns={columns}
         pagination
         defaultSortFieldId={4}
+        noDataComponent={<TableSkeleton />}
         // customStyles={customStyles}
       />
     </>

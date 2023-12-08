@@ -8,6 +8,7 @@ const AdminBookings = () => {
   const getBookings = async () => {
     try {
       const response = await axiosInstance.get("/bookings");
+
       setBookings(response.data.formattedBookings);
     } catch (error) {
       console.log(error);
@@ -16,11 +17,7 @@ const AdminBookings = () => {
   useEffect(() => {
     getBookings();
   }, []);
-  return (
-    <>
-      <TableBookings bookings={bookings} />
-    </>
-  );
+  return <TableBookings bookings={bookings} />;
 };
 
 export default AdminBookings;

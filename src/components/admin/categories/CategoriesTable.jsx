@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { customStyles } from "./TableCustomStyles";
 import "../../../style/admin/categories/table.css";
+import TableSkeleton from "../../skeletons/TableSkeleton";
 
 const CategoriesTable = ({ categories, handleEdit, handleDelete }) => {
   const columns = [
@@ -106,6 +107,7 @@ const CategoriesTable = ({ categories, handleEdit, handleDelete }) => {
         columns={columns}
         pagination
         defaultSortFieldId={4}
+        noDataComponent={<TableSkeleton />}
         customStyles={customStyles}
       />
     </>
