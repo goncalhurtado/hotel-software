@@ -67,7 +67,7 @@ const TableRoom = ({ rooms, categories, setModal, getRooms }) => {
 
   const handleDelete = async (e, row) => {
     e.preventDefault();
-    await deleteRoom(row, getRooms);
+    await deleteBooking(row, getRooms);
   };
 
   useEffect(() => {

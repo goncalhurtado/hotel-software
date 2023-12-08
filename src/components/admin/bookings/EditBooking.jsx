@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import { editBooking } from "../../../helpers/admin/adminBookings";
 import { LoadingButton } from "@mui/lab";
 
-const EditBooking = ({ editing, setEditing }) => {
+const EditBooking = ({ editing, setEditing, getBookings }) => {
   const {
     firstName,
     lastName,
@@ -38,7 +38,7 @@ const EditBooking = ({ editing, setEditing }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    editBooking(formData, setLoading, setError, _id);
+    editBooking(formData, setLoading, _id, setEditing, getBookings);
   };
 
   return (

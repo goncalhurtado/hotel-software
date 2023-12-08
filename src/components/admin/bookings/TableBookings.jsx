@@ -7,8 +7,9 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import TableSkeleton from "../../skeletons/TableSkeleton";
 import Box from "@mui/material/Box";
+import { deleteBooking } from "../../../helpers/admin/adminBookings";
 
-const TableBookings = ({ bookings, setModal, setEditing }) => {
+const TableBookings = ({ bookings, getBookings, setModal, setEditing }) => {
   const [bookingsTable, setBookingsTable] = useState([]);
   const columns = [
     {
@@ -117,13 +118,18 @@ const TableBookings = ({ bookings, setModal, setEditing }) => {
           <IconButton onClick={() => setEditing({ status: true, data: row })}>
             <EditNoteOutlinedIcon />
           </IconButton>
-          <IconButton color="error">
+          <IconButton color="error" onClick={(e) => handleDelete(e, row)}>
             <DeleteIcon />
           </IconButton>
         </Box>
       ),
     },
   ];
+
+  const handleDelete = async (e, row) => {
+    e.preventDefault();
+    deleteBooking(row, getBookings);
+  };
 
   useEffect(() => {
     setBookingsTable(bookings);
