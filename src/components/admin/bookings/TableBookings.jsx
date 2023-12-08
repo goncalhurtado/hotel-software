@@ -6,6 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import TableSkeleton from "../../skeletons/TableSkeleton";
+import Box from "@mui/material/Box";
 
 const TableBookings = ({ bookings, setModal }) => {
   const [bookingsTable, setBookingsTable] = useState([]);
@@ -81,10 +82,33 @@ const TableBookings = ({ bookings, setModal }) => {
       width: "80px",
     },
     {
-      name: "Payment Status",
-      selector: (row) => row.info.paymentStatus,
+      name: "Payment",
+      selector: (row) => row.info.paymentMethod,
+      cell: (row) => (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          <Box>
+            <Box display={"flex"}>
+              <b>method</b>
+              <p style={{ marginLeft: "5px" }}>{row.info.paymentMethod}</p>
+            </Box>
+            <Box display={"flex"}>
+              <b>status</b>
+              <p style={{ marginLeft: "5px" }}>{row.info.paymentStatus}</p>
+            </Box>
+          </Box>
+        </div>
+      ),
       sortable: true,
+      width: "150px",
     },
+
     {
       name: "",
       //
