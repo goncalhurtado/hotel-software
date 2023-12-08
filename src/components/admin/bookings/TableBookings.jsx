@@ -1,51 +1,128 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { IconButton } from "@mui/material";
+import { dateFormater } from "../../../helpers/admin/adminBookings";
 import DataTable from "react-data-table-component";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import TableSkeleton from "../../skeletons/TableSkeleton";
+import Box from "@mui/material/Box";
 
-const TableBookings = ({ bookings }) => {
+const TableBookings = ({ bookings, setModal, setEditing }) => {
   const [bookingsTable, setBookingsTable] = useState([]);
-
   const columns = [
     {
-      name: "Bookings",
+      name: "Booking ID",
       selector: (row) => row.bookingId,
       sortable: true,
+      width: "110px",
     },
+
     {
-      name: "Category",
-      selector: (row) => row.room.category.name,
-      sortable: true,
-    },
-    {
-      name: "Client",
-      selector: (row) => (
-        <p>
-          {row.info.lastName} {row.info.firstName}
-        </p>
+      name: "Guest",
+      selector: (row) => row.info.lastName,
+      cell: (row) => (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          <div>
+            <p>
+              {row.info.lastName} {row.info.firstName}
+            </p>
+            <p>{row.info.email}</p>
+          </div>
+          <div
+            style={{ cursor: "pointer" }}
+            onClick={() => setModal({ action: true, data: row.info })}
+          >
+            <InfoOutlinedIcon sx={{ ml: 1 }} />
+          </div>
+        </div>
       ),
       sortable: true,
+    },
+    {
+      name: "Order Date",
+      selector: (row) => {
+        if (row.date) {
+          return dateFormater(row.date);
+        }
+        return "";
+      },
+      sortable: true,
+      width: "130px",
     },
     {
       name: "Check In",
       selector: (row) => row.check_in,
       sortable: true,
+      width: "110px",
     },
     {
       name: "Check Out",
       selector: (row) => row.check_out,
       sortable: true,
+      width: "110px",
     },
     {
-      name: "Payment Status",
-      selector: (row) => row.info.paymentStatus,
+      name: "Category",
+      selector: (row) => row.room.category.name,
       sortable: true,
+      width: "110px",
     },
-    // {
-    //     name: "information",
-    //     selector: (row) => row.info,
-    //     sortable: true,
-    // }
+    {
+      name: "Room",
+      selector: (row) => row.room.number,
+      sortable: true,
+      width: "80px",
+    },
+    {
+      name: "Payment",
+      selector: (row) => row.info.paymentMethod,
+      cell: (row) => (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          <Box>
+            <Box display={"flex"}>
+              <b>method</b>
+              <p style={{ marginLeft: "5px" }}>{row.info.paymentMethod}</p>
+            </Box>
+            <Box display={"flex"}>
+              <b>status</b>
+              <p style={{ marginLeft: "5px" }}>{row.info.paymentStatus}</p>
+            </Box>
+          </Box>
+        </div>
+      ),
+      sortable: true,
+      width: "150px",
+    },
+
+    {
+      name: "",
+      //
+      cell: (row) => (
+        <Box>
+          <IconButton onClick={() => setEditing({ status: true, data: row })}>
+            <EditNoteOutlinedIcon />
+          </IconButton>
+          <IconButton color="error">
+            <DeleteIcon />
+          </IconButton>
+        </Box>
+      ),
+    },
   ];
 
   useEffect(() => {
@@ -59,7 +136,8 @@ const TableBookings = ({ bookings }) => {
         data={bookingsTable}
         columns={columns}
         pagination
-        defaultSortFieldId={1}
+        defaultSortFieldId={4}
+        noDataComponent={<TableSkeleton />}
         // customStyles={customStyles}
       />
     </>

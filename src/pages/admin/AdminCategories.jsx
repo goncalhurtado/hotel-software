@@ -6,7 +6,6 @@ import EditCategory from "../../components/admin/categories/EditCategory";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CreateCategory from "../../components/admin/categories/CreateCategory";
-// import Swal from "sweetalert2";
 import { deleteCategory } from "../../helpers/admin/categories";
 
 const AdminCategories = () => {

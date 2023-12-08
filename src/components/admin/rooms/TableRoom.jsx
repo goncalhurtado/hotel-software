@@ -6,6 +6,7 @@ import FilterRoom from "./FilterRoom";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { deleteRoom } from "../../../helpers/admin/rooms";
+import TableSkeleton from "../../skeletons/TableSkeleton";
 
 const TableRoom = ({ rooms, categories, setModal, getRooms }) => {
   const [roomsTable, setRoomsTable] = useState([]);
@@ -81,7 +82,7 @@ const TableRoom = ({ rooms, categories, setModal, getRooms }) => {
         columns={columns}
         pagination
         defaultSortFieldId={1}
-        // customStyles={customStyles}
+        noDataComponent={<TableSkeleton />}
       />
     </>
   );
