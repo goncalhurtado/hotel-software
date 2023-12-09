@@ -26,11 +26,16 @@ const AdminBookings = () => {
       {!editing.status ? (
         <TableBookings
           bookings={bookings}
+          getBookings={getBookings}
           setModal={setModal}
           setEditing={setEditing}
         />
       ) : (
-        <EditBooking editing={editing} setEditing={setEditing} />
+        <EditBooking
+          editing={editing}
+          setEditing={setEditing}
+          getBookings={getBookings}
+        />
       )}
 
       <ModalBookings setModal={setModal} modal={modal} />

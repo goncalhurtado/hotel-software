@@ -7,8 +7,10 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import TableSkeleton from "../../skeletons/TableSkeleton";
 import Box from "@mui/material/Box";
+import { deleteBooking } from "../../../helpers/admin/adminBookings";
+import { customStylesBooking } from "../categories/TableCustomStyles";
 
-const TableBookings = ({ bookings, setModal, setEditing }) => {
+const TableBookings = ({ bookings, getBookings, setModal, setEditing }) => {
   const [bookingsTable, setBookingsTable] = useState([]);
   const columns = [
     {
@@ -55,7 +57,7 @@ const TableBookings = ({ bookings, setModal, setEditing }) => {
         return "";
       },
       sortable: true,
-      width: "130px",
+      width: "120px",
     },
     {
       name: "Check In",
@@ -100,7 +102,7 @@ const TableBookings = ({ bookings, setModal, setEditing }) => {
             </Box>
             <Box display={"flex"}>
               <b>status</b>
-              <p style={{ marginLeft: "5px" }}>{row.info.paymentStatus}</p>
+              <p style={{ marginLeft: "15px" }}>{row.info.paymentStatus}</p>
             </Box>
           </Box>
         </div>
@@ -117,7 +119,7 @@ const TableBookings = ({ bookings, setModal, setEditing }) => {
           <IconButton onClick={() => setEditing({ status: true, data: row })}>
             <EditNoteOutlinedIcon />
           </IconButton>
-          <IconButton color="error">
+          <IconButton color="error" onClick={(e) => handleDelete(e, row)}>
             <DeleteIcon />
           </IconButton>
         </Box>
@@ -125,20 +127,24 @@ const TableBookings = ({ bookings, setModal, setEditing }) => {
     },
   ];
 
+  const handleDelete = async (e, row) => {
+    e.preventDefault();
+    deleteBooking(row, getBookings);
+  };
+
   useEffect(() => {
     setBookingsTable(bookings);
   }, [bookings]);
 
   return (
     <>
-      TableBookings
       <DataTable
         data={bookingsTable}
         columns={columns}
         pagination
         defaultSortFieldId={4}
         noDataComponent={<TableSkeleton />}
-        // customStyles={customStyles}
+        customStyles={customStylesBooking}
       />
     </>
   );

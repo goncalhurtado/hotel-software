@@ -22,7 +22,7 @@ export const postBooking = async(formData, setLoading, setSuccessInfo) => {
             firstName: savedBooking.info.firstName,
             email: savedBooking.info.email,
         });
-
+        console.log(response);
 
     } catch (error) {
         setLoading(false);

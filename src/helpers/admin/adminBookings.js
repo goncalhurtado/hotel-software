@@ -8,7 +8,7 @@ export const dateFormater = (dateString) => {
     return `${formattedDate} ${formattedTime}`;
 }
 
-export const editBooking = async(formData, setLoading, setError, _id) => {
+export const editBooking = async(formData, setLoading, _id, setEditing, getBookings) => {
 
     console.log(formData);
     setLoading(true)
@@ -22,6 +22,9 @@ export const editBooking = async(formData, setLoading, setError, _id) => {
             confirmButtonText: "Ok",
         });
         console.log(response);
+        getBookings();
+        setEditing({ status: false, data: {} });
+
 
     } catch (error) {
         setLoading(false);
@@ -32,4 +35,27 @@ export const editBooking = async(formData, setLoading, setError, _id) => {
             confirmButtonText: "Ok",
         });
     }
+}
+
+
+export const deleteBooking = async(row, getBookings) => {
+
+    Swal.fire({
+            title: `Do you want to delete the ${row.bookingId} booking ?`,
+            showCancelButton: true,
+            confirmButtonText: "Delete",
+        })
+        .then(async(result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await axiosInstance.delete(`/booking/${row._id}`);
+                    Swal.fire(`${response.data.message}`, ``, "success");
+                    getBookings();
+                } catch (error) {
+                    const errorMessage = error.response.data.message || error.message;
+                    Swal.fire(`${errorMessage}`, ``, "error");
+                }
+            }
+        });
+
 }
