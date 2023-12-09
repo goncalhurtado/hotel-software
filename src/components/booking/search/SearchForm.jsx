@@ -38,7 +38,7 @@ const SearchForm = ({ setAvailables, selected, setSelected }) => {
           width: { xs: "90%", sm: "80%", lg: "50%" },
           height: { xs: "80px", sm: "80px", lg: "100%" },
         }}
-        backgroundColor="red"
+        // backgroundColor="red"
       >
         <Box
           sx={{
@@ -51,12 +51,12 @@ const SearchForm = ({ setAvailables, selected, setSelected }) => {
         >
           <Box
             sx={{
-              display: !showDate ? "block" : "none",
               position: "absolute",
               zIndex: "1",
+              marginTop: "-3px",
             }}
           >
-            <DatePreview />
+            <DatePreview date={date} />
           </Box>
           <Box
             sx={{
@@ -64,7 +64,7 @@ const SearchForm = ({ setAvailables, selected, setSelected }) => {
               position: "absolute",
               backgroundColor: "red",
               zIndex: "1",
-              marginTop: "-3px",
+              marginTop: "48px",
             }}
           >
             {<DatePickerBooking date={date} setDate={setDate} />}
