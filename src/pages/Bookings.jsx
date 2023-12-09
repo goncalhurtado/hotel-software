@@ -1,12 +1,11 @@
-import React from "react";
-import SearchForm from "../components/SearchForm";
+import React, { useState } from "react";
 import { Box } from "@mui/material";
-import { useState } from "react";
-import RoomBookingCard from "../components/RoomBookingCard";
+import SearchForm from "../components/booking/search/SearchForm";
+import RoomBookingCard from "../components/booking/RoomBookingCard";
+import RoomBookingCardSoldOut from "../components/booking/RoomBookingCardSoldOut";
+import BookingPreview from "../components/booking/BookingPreview";
 import Grid from "@mui/material/Grid";
-import BookingPreview from "../components/BookingPreview";
 import Reservation from "../components/Reservation";
-import RoomBookingCardSoldOut from "../components/RoomBookingCardSoldOut";
 
 const Bookings = () => {
   const [availables, setAvailables] = useState({

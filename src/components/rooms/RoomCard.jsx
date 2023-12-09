@@ -31,10 +31,9 @@ const RoomCard = ({ room }) => {
             <Box display="flex">
               <Box
                 sx={{
-                  height: 233,
-                  width: 350,
-                  maxHeight: { xs: 233, md: 167 },
-                  maxWidth: { xs: 350, md: 250 },
+                  width: { xs: "50%", sm: 300, lg: 350 },
+                  height: { xs: "120px", sm: 200, lg: 233 },
+
                   marginRight: "20px",
                 }}
                 component="img"
