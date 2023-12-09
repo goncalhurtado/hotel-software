@@ -8,6 +8,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import TableSkeleton from "../../skeletons/TableSkeleton";
 import Box from "@mui/material/Box";
 import { deleteBooking } from "../../../helpers/admin/adminBookings";
+import { customStylesBooking } from "../categories/TableCustomStyles";
 
 const TableBookings = ({ bookings, getBookings, setModal, setEditing }) => {
   const [bookingsTable, setBookingsTable] = useState([]);
@@ -56,7 +57,7 @@ const TableBookings = ({ bookings, getBookings, setModal, setEditing }) => {
         return "";
       },
       sortable: true,
-      width: "130px",
+      width: "120px",
     },
     {
       name: "Check In",
@@ -101,7 +102,7 @@ const TableBookings = ({ bookings, getBookings, setModal, setEditing }) => {
             </Box>
             <Box display={"flex"}>
               <b>status</b>
-              <p style={{ marginLeft: "5px" }}>{row.info.paymentStatus}</p>
+              <p style={{ marginLeft: "15px" }}>{row.info.paymentStatus}</p>
             </Box>
           </Box>
         </div>
@@ -143,7 +144,7 @@ const TableBookings = ({ bookings, getBookings, setModal, setEditing }) => {
         pagination
         defaultSortFieldId={4}
         noDataComponent={<TableSkeleton />}
-        // customStyles={customStyles}
+        customStyles={customStylesBooking}
       />
     </>
   );
