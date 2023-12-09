@@ -12,7 +12,7 @@ const Bookings = () => {
     categories: [],
     rooms: [], //rooms solo para poder confirmar las reservas restantes, despues lo puedo eliminar
   });
-  console.log(availables);
+
   const [selected, setSelected] = useState({
     selected: false,
     category: [],

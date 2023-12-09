@@ -1,13 +1,37 @@
 import React from "react";
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { parse, format } from "date-fns";
+// import { parse, format } from "date-fns";
+import { useEffect, useState } from "react";
+import { parse, format, isValid } from "date-fns";
 
 const DatePreview = ({ date }) => {
-  const startDate = parse(date.start_date, "MM/dd/yyyy", new Date());
-  const endDate = parse(date.end_date, "MM/dd/yyyy", new Date());
-  const formattedStartDate = format(startDate, "MMM dd, yyyy");
-  const formattedEndDate = format(endDate, "MMM dd, yyyy");
+  const [formattedDates, setFormattedDates] = useState({
+    startDate: "",
+    endDate: "",
+  });
+
+  useEffect(() => {
+    let startDate, endDate;
+
+    if (date.start_date && date.end_date) {
+      startDate = parse(date.start_date, "MM/dd/yyyy", new Date());
+      endDate = parse(date.end_date, "MM/dd/yyyy", new Date());
+    } else {
+      startDate = new Date();
+      endDate = new Date();
+      endDate.setDate(endDate.getDate() + 1);
+    }
+
+    if (isValid(startDate) && isValid(endDate)) {
+      setFormattedDates({
+        startDate: format(startDate, "MMM dd, yyyy"),
+        endDate: format(endDate, "MMM dd, yyyy"),
+      });
+    } else {
+      console.log("Invalid time");
+    }
+  }, [date]);
 
   return (
     <Box
@@ -35,7 +59,7 @@ const DatePreview = ({ date }) => {
           alignItems: "center",
         }}
       >
-        <Typography>{formattedStartDate}</Typography>
+        <Typography>{formattedDates.startDate}</Typography>
       </Box>
       <Box
         sx={{
@@ -49,7 +73,7 @@ const DatePreview = ({ date }) => {
           alignItems: "center",
         }}
       >
-        <Typography>{formattedEndDate}</Typography>
+        <Typography>{formattedDates.endDate}</Typography>
       </Box>
     </Box>
   );
