@@ -11,7 +11,7 @@ const SelectCapacity = ({ capacity, setCapacity }) => {
 
   return (
     <div>
-      <InputLabel id="">Adults</InputLabel>
+      <InputLabel id="">Guest</InputLabel>
       <Select value={capacity} label="Adults" onChange={handleChange}>
         <MenuItem value={1}>1</MenuItem>
         <MenuItem value={2}>2</MenuItem>

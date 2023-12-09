@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../config/axiosInstance";
-import RoomCard from "../components/RoomCard";
+import RoomCard from "../components/rooms/RoomCard";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";

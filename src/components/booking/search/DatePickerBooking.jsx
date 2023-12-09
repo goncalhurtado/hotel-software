@@ -4,7 +4,7 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
 
-import "../style/datePicker.css";
+import "../../../style/datePicker.css";
 
 const DatePickerBooking = ({ date, setDate }) => {
   const [dateRange, setDateRange] = useState({
@@ -39,6 +39,8 @@ const DatePickerBooking = ({ date, setDate }) => {
         onChange={handleSelect}
         minDate={new Date()}
         showDateDisplay={true}
+        showMonthAndYearPickers={false}
+        // showMonthArrow={true}
         className="rdrDateRangeWrapper"
       />
     </>
