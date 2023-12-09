@@ -39,9 +39,10 @@ const DatePickerBooking = ({ date, setDate }) => {
         onChange={handleSelect}
         minDate={new Date()}
         showDateDisplay={false}
-        showMonthAndYearPickers={false}
-        // showMonthArrow={true}
+        showMonthAndYearPickers={true}
+        showMonthArrow={true}
         className="rdrDateRangeWrapper"
+        style={{ width: "326px" }}
       />
     </>
   );

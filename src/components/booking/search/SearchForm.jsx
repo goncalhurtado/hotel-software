@@ -37,6 +37,7 @@ const SearchForm = ({ setAvailables, selected, setSelected }) => {
         sx={{
           width: { xs: "90%", sm: "80%", lg: "50%" },
           height: { xs: "80px", sm: "80px", lg: "100%" },
+          marginBottom: "25px",
         }}
         // backgroundColor="red"
       >
@@ -62,9 +63,10 @@ const SearchForm = ({ setAvailables, selected, setSelected }) => {
             sx={{
               display: showDate ? "block" : "none",
               position: "absolute",
-              backgroundColor: "red",
+              border: "3px solid #dadadb",
               zIndex: "1",
               marginTop: "48px",
+              boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
             }}
           >
             {<DatePickerBooking date={date} setDate={setDate} />}
