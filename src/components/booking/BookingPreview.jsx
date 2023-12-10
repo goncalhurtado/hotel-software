@@ -8,22 +8,25 @@ import { Box, Button } from "@mui/material";
 const BookingPreview = ({ selected, setSelected }) => {
   return (
     <Grid item lg={12}>
-      <Card>
+      <Card sx={{ width: { xs: "250px", sm: "250px", md: "250px" } }}>
         <CardContent>
-          <Typography>Cantidad de Noches: </Typography>
+          <Typography>Nights: {selected.nights}</Typography>
           <Typography>
-            Tipo de Habitacion:{" "}
-            {selected.selected ? selected.category.name : ""}
+            Category: {selected.selected ? selected.category.name : ""}
           </Typography>
           <Typography>
-            Precio: ${selected.selected ? selected.category.price : ""}
+            Price Per Night: ${selected.selected ? selected.category.price : ""}
+          </Typography>
+          <Typography variant="h6">
+            Total: ${selected.selected ? selected.price : ""}
           </Typography>
           <Button
-            disabled={selected.selected ? false : true}
+            disabled={!selected.selected}
             variant="contained"
             onClick={() => setSelected({ ...selected, booked: true })}
+            sx={{ display: "flex", margin: "auto" }}
           >
-            Reservar
+            Book
           </Button>
         </CardContent>
       </Card>

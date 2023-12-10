@@ -57,3 +57,14 @@ export const searchAvailableRooms = async(queryString, setLoading, setAvailables
     }
 
 }
+
+export const nightsCalculator = (checkIn, checkOut) => {
+    console.log(checkIn, checkOut);
+    if (!checkIn || !checkOut) return 0;
+
+    const checkInDate = new Date(checkIn);
+    const checkOutDate = new Date(checkOut);
+    const difference = checkOutDate.getTime() - checkInDate.getTime();
+    const nights = Math.ceil(difference / (1000 * 3600 * 24));
+    return nights;
+}
