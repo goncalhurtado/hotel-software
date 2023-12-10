@@ -10,6 +10,7 @@ import { LoadingButton } from "@mui/lab";
 import { postBooking } from "../helpers/booking";
 import Grid from "@mui/material/Grid";
 import { validate } from "../helpers/validation";
+import Typography from "@mui/material/Typography";
 
 const BookingForm = ({ selected, setSuccessInfo }) => {
   const [loading, setLoading] = useState(false);
@@ -34,8 +35,6 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
     check_in: selected.check_in,
     check_out: selected.check_out,
   });
-
-  console.log(error);
 
   const handleChange = (e) => {
     setError({ status: false, message: "" });
@@ -64,9 +63,13 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
       return;
     }
 
-    validate(formData, setError);
+    const validation = validate(formData, setError);
+    console.log(validation);
+    if (!validation) {
+      return;
+    }
 
-    // postBooking(formData, setLoading, setSuccessInfo);
+    postBooking(formData, setLoading, setSuccessInfo);
   };
 
   return (
@@ -87,7 +90,6 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
           sx={{
             display: "flex",
             flexDirection: { xs: "column", sm: "row", md: "row" },
-            display: "flex",
             justifyContent: "center",
           }}
         >
@@ -98,9 +100,10 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             name="firstName"
             onChange={handleChange}
             sx={{
-              marginRight: { xs: 0, sm: "10px", md: "10px" },
+              marginRight: { xs: "10px", sm: "10px", md: "10px" },
               margin: "10px",
             }}
+            inputProps={{ maxLength: 20 }}
           />
           <TextField
             type="text"
@@ -111,6 +114,7 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             sx={{
               margin: "10px",
             }}
+            inputProps={{ maxLength: 20 }}
           />
         </Grid>
         <Grid
@@ -122,18 +126,27 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
           }}
         >
           <TextField
-            type="phone"
-            label="Phone"
-            variant="outlined"
-            name="phone"
+            type="text"
             onChange={handleChange}
+            name="phone"
+            label="Phone Number"
+            onKeyDown={(event) => {
+              if (
+                !/[0-9]/.test(event.key) &&
+                event.key !== "Backspace" &&
+                event.key !== "Delete"
+              ) {
+                event.preventDefault();
+              }
+            }}
             sx={{
-              marginRight: { xs: 0, sm: "10px", md: "10px" },
+              marginRight: { xs: "10px", sm: "10px", md: "10px" },
               margin: "10px",
             }}
+            inputProps={{ maxLength: 20 }}
           />
           <TextField
-            type="adress"
+            type="text"
             label="Country of Origin"
             variant="outlined"
             name="country"
@@ -141,6 +154,7 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             sx={{
               margin: "10px",
             }}
+            inputProps={{ maxLength: 20 }}
           />
         </Grid>
         <Grid
@@ -158,9 +172,10 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             name="email"
             onChange={handleChange}
             sx={{
-              marginRight: { xs: 0, sm: "10px", md: "10px" },
+              marginRight: { xs: "10px", sm: "10px", md: "10px" },
               margin: "10px",
             }}
+            inputProps={{ maxLength: 35 }}
           />
           <TextField
             type="email"
@@ -171,6 +186,7 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             sx={{
               margin: "10px",
             }}
+            inputProps={{ maxLength: 35 }}
           />
         </Grid>
 
@@ -202,10 +218,20 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
           </FormControl>
 
           <TextField
-            type="number"
+            type="text"
             label="Number"
             variant="outlined"
             name="passport"
+            inputProps={{ maxLength: 20 }}
+            onKeyDown={(event) => {
+              if (
+                !/[0-9]/.test(event.key) &&
+                event.key !== "Backspace" &&
+                event.key !== "Delete"
+              ) {
+                event.preventDefault();
+              }
+            }}
             onChange={handleChange}
             sx={{
               margin: "10px",
@@ -225,7 +251,7 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             sx={{
               width: { xs: "331px", sm: "222px", md: "222px" },
               margin: "10px",
-              marginRight: { xs: 0, sm: "10px", md: "10px" },
+              marginRight: { xs: "10px", sm: "10px", md: "10px" },
             }}
           >
             <InputLabel>Estimated Arrival Time</InputLabel>
@@ -281,10 +307,13 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
               width: { xs: "331px", sm: "464px", md: "464px" },
               margin: "10px",
             }}
+            inputProps={{ maxLength: 130 }}
+            multiline
+            rows={4}
           />
         </Grid>
-        <Box height={30} textAlign={"center"}>
-          {error.status && error.message}
+        <Box height={35} textAlign={"center"} sx={{ color: "red" }}>
+          <Typography>{error.status && error.message}</Typography>
         </Box>
         <LoadingButton
           loading={!loading ? false : true}
