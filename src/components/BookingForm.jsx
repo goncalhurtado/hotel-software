@@ -9,9 +9,12 @@ import { arrivalTimes } from "../helpers/information";
 import { LoadingButton } from "@mui/lab";
 import { postBooking } from "../helpers/booking";
 import Grid from "@mui/material/Grid";
+import { validate } from "../helpers/validation";
 
 const BookingForm = ({ selected, setSuccessInfo }) => {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({ status: false, message: "" });
+  const [repeatEmail, setRepeatEmail] = useState("");
   const [formData, setFormData] = useState({
     info: {
       firstName: "",
@@ -25,14 +28,17 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
       paymentMethod: "",
       additionalComments: "",
       paymentStatus: "pending",
-      price: selected.category.price,
+      price: selected.price,
     },
     category: selected.category._id,
     check_in: selected.check_in,
     check_out: selected.check_out,
   });
 
+  console.log(error);
+
   const handleChange = (e) => {
+    setError({ status: false, message: "" });
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -46,12 +52,21 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
     }));
   };
   const handleChangeEmail = (e) => {
+    setError({ status: false, message: "" });
     const { name, value } = e.target;
+    setRepeatEmail(value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    postBooking(formData, setLoading, setSuccessInfo);
+    if (formData.info.email !== repeatEmail) {
+      setError({ status: true, message: "Emails don't match" });
+      return;
+    }
+
+    validate(formData, setError);
+
+    // postBooking(formData, setLoading, setSuccessInfo);
   };
 
   return (
@@ -268,6 +283,9 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             }}
           />
         </Grid>
+        <Box height={30} textAlign={"center"}>
+          {error.status && error.message}
+        </Box>
         <LoadingButton
           loading={!loading ? false : true}
           variant="contained"
