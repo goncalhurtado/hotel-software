@@ -8,17 +8,34 @@ import Grid from "@mui/material/Grid";
 
 const RoomBookingCard = ({ category, setSelected }) => {
   return (
-    <Grid item xs={12} sm={12} md={12} lg={12}>
-      <Card sx={{ maxWidth: 800, marginBottom: "20px" }}>
+    <Grid
+      item
+      xs={12}
+      sm={12}
+      md={12}
+      lg={12}
+      sx={{
+        display: { xs: "flex", sm: "flex", md: "initial" },
+        justifyContent: { xs: "center", sm: "center", md: "initial" },
+      }}
+    >
+      <Card
+        sx={{
+          width: {
+            xs: "90%",
+            sm: "90%",
+            md: "90%",
+          },
+          marginBottom: "20px",
+        }}
+      >
         <CardContent>
           <Box display="flex">
             <Box>
               <Box
                 sx={{
-                  height: 233,
-                  width: 350,
-                  maxHeight: { xs: 233, md: 167 },
-                  maxWidth: { xs: 350, md: 250 },
+                  width: { xs: "120px", sm: 300, lg: 350 },
+                  height: { xs: "120px", sm: 200, lg: 233 },
                   marginRight: "20px",
                 }}
                 component="img"

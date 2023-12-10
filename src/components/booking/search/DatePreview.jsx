@@ -1,18 +1,41 @@
 import React from "react";
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { parse, format } from "date-fns";
+// import { parse, format } from "date-fns";
+import { useEffect, useState } from "react";
+import { parse, format, isValid } from "date-fns";
 
 const DatePreview = ({ date }) => {
-  const startDate = parse(date.start_date, "MM/dd/yyyy", new Date());
-  const endDate = parse(date.end_date, "MM/dd/yyyy", new Date());
-  const formattedStartDate = format(startDate, "MMM dd, yyyy");
-  const formattedEndDate = format(endDate, "MMM dd, yyyy");
+  const [formattedDates, setFormattedDates] = useState({
+    startDate: "",
+    endDate: "",
+  });
+
+  useEffect(() => {
+    let startDate, endDate;
+
+    if (date.start_date && date.end_date) {
+      startDate = parse(date.start_date, "MM/dd/yyyy", new Date());
+      endDate = parse(date.end_date, "MM/dd/yyyy", new Date());
+    } else {
+      startDate = new Date();
+      endDate = new Date();
+    }
+
+    if (isValid(startDate) && isValid(endDate)) {
+      setFormattedDates({
+        startDate: format(startDate, "MMM dd, yyyy"),
+        endDate: format(endDate, "MMM dd, yyyy"),
+      });
+    } else {
+      console.log("Invalid time");
+    }
+  }, [date]);
 
   return (
     <Box
       sx={{
-        width: "351px",
+        width: { xs: "250px", sm: "351px" },
         height: "54px",
         backgroundColor: "#dadadb",
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
@@ -24,7 +47,7 @@ const DatePreview = ({ date }) => {
     >
       <Box
         sx={{
-          width: "159px",
+          width: { xs: "100px", sm: "159px" },
           height: "33px",
           borderRadius: "5px",
           backgroundColor: "white",
@@ -35,11 +58,11 @@ const DatePreview = ({ date }) => {
           alignItems: "center",
         }}
       >
-        <Typography>{formattedStartDate}</Typography>
+        <Typography>{formattedDates.startDate}</Typography>
       </Box>
       <Box
         sx={{
-          width: "159px",
+          width: { xs: "100px", sm: "159px" },
           height: "33px",
           borderRadius: "5px",
           backgroundColor: "white",
@@ -49,7 +72,7 @@ const DatePreview = ({ date }) => {
           alignItems: "center",
         }}
       >
-        <Typography>{formattedEndDate}</Typography>
+        <Typography>{formattedDates.endDate}</Typography>
       </Box>
     </Box>
   );
