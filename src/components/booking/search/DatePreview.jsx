@@ -20,7 +20,6 @@ const DatePreview = ({ date }) => {
     } else {
       startDate = new Date();
       endDate = new Date();
-      endDate.setDate(endDate.getDate() + 1);
     }
 
     if (isValid(startDate) && isValid(endDate)) {
@@ -36,7 +35,7 @@ const DatePreview = ({ date }) => {
   return (
     <Box
       sx={{
-        width: "351px",
+        width: { xs: "250px", sm: "351px" },
         height: "54px",
         backgroundColor: "#dadadb",
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
@@ -48,7 +47,7 @@ const DatePreview = ({ date }) => {
     >
       <Box
         sx={{
-          width: "159px",
+          width: { xs: "100px", sm: "159px" },
           height: "33px",
           borderRadius: "5px",
           backgroundColor: "white",
@@ -63,7 +62,7 @@ const DatePreview = ({ date }) => {
       </Box>
       <Box
         sx={{
-          width: "159px",
+          width: { xs: "100px", sm: "159px" },
           height: "33px",
           borderRadius: "5px",
           backgroundColor: "white",

@@ -41,7 +41,7 @@ const DatePickerBooking = ({ date, setDate }) => {
         showDateDisplay={false}
         showMonthAndYearPickers={true}
         showMonthArrow={true}
-        className="rdrDateRangeWrapper"
+        className="datePickerSize"
         style={{ width: "326px" }}
       />
     </>
