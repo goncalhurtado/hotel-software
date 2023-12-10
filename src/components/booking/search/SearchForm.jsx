@@ -23,11 +23,13 @@ const SearchForm = ({ setAvailables, selected, setSelected }) => {
   });
 
   const handleSubmit = async () => {
+    const nights = nightsCalculator(date.start_date, date.end_date);
+
     setSelected({
       check_in: date.start_date,
       check_out: date.end_date,
       capacity: capacity,
-      nights: nightsCalculator(date.start_date, date.end_date),
+      nights: nights,
     });
 
     const queryString = `search?check_in=${date.start_date}&check_out=${date.end_date}&capacity=${capacity}`;

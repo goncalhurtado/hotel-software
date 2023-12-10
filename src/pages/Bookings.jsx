@@ -23,7 +23,7 @@ const Bookings = () => {
     capacity: "",
     nigths: 0,
   });
-  console.log(selected);
+  // console.log(selected);
 
   useEffect(() => {
     setSelected((prevSelected) => ({

@@ -59,7 +59,7 @@ export const searchAvailableRooms = async(queryString, setLoading, setAvailables
 }
 
 export const nightsCalculator = (checkIn, checkOut) => {
-
+    console.log(checkIn, checkOut);
     if (!checkIn || !checkOut) return 0;
 
     const checkInDate = new Date(checkIn);

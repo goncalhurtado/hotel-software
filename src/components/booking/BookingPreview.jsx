@@ -18,8 +18,7 @@ const BookingPreview = ({ selected, setSelected }) => {
             Price Per Night: ${selected.selected ? selected.category.price : ""}
           </Typography>
           <Typography variant="h6">
-            Total: $
-            {selected.selected ? selected.category.price * selected.nights : ""}
+            Total: ${selected.selected ? selected.price : ""}
           </Typography>
           <Button
             disabled={!selected.selected}

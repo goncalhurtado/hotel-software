@@ -58,6 +58,7 @@ const RoomBookingCard = ({ category, setSelected }) => {
                     ...prevSelected,
                     selected: true,
                     category: category,
+                    price: category.price * prevSelected.nights,
                   }))
                 }
                 sx={{ marginTop: "10px" }}
