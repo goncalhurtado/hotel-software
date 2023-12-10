@@ -8,7 +8,7 @@ import { Box, Button } from "@mui/material";
 const BookingPreview = ({ selected, setSelected }) => {
   return (
     <Grid item lg={12}>
-      <Card>
+      <Card sx={{ width: { xs: "250px", sm: "250px", md: "250px" } }}>
         <CardContent>
           <Typography>Nights: {selected.nights}</Typography>
           <Typography>
@@ -24,6 +24,7 @@ const BookingPreview = ({ selected, setSelected }) => {
             disabled={!selected.selected}
             variant="contained"
             onClick={() => setSelected({ ...selected, booked: true })}
+            sx={{ display: "flex", margin: "auto" }}
           >
             Book
           </Button>

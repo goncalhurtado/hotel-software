@@ -62,6 +62,7 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
           // "& > :not(style)": { m: 1, width: "25ch" },
           width: { xs: "90%", sm: "90%", md: "600px" },
           margin: "auto",
+          marginTop: "20px",
         }}
         noValidate
         autoComplete="off"
@@ -73,10 +74,6 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             flexDirection: { xs: "column", sm: "row", md: "row" },
             display: "flex",
             justifyContent: "center",
-            width: "100%",
-            "& > *": {
-              margin: "10px",
-            },
           }}
         >
           <TextField
@@ -86,7 +83,8 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             name="firstName"
             onChange={handleChange}
             sx={{
-              marginRight: { xs: 0, sm: "40px", md: "40px" },
+              marginRight: { xs: 0, sm: "10px", md: "10px" },
+              margin: "10px",
             }}
           />
           <TextField
@@ -95,6 +93,9 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             variant="outlined"
             name="lastName"
             onChange={handleChange}
+            sx={{
+              margin: "10px",
+            }}
           />
         </Grid>
         <Grid
@@ -103,9 +104,6 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             flexDirection: { xs: "column", sm: "row", md: "row" },
             display: "flex",
             justifyContent: "center",
-            "& > *": {
-              margin: "10px",
-            },
           }}
         >
           <TextField
@@ -115,7 +113,8 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             name="phone"
             onChange={handleChange}
             sx={{
-              marginRight: { xs: 0, sm: "40px", md: "40px" },
+              marginRight: { xs: 0, sm: "10px", md: "10px" },
+              margin: "10px",
             }}
           />
           <TextField
@@ -124,6 +123,9 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             variant="outlined"
             name="country"
             onChange={handleChange}
+            sx={{
+              margin: "10px",
+            }}
           />
         </Grid>
         <Grid
@@ -132,9 +134,6 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             flexDirection: { xs: "column", sm: "row", md: "row" },
             display: "flex",
             justifyContent: "center",
-            "& > *": {
-              margin: "10px",
-            },
           }}
         >
           <TextField
@@ -144,7 +143,8 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             name="email"
             onChange={handleChange}
             sx={{
-              marginRight: { xs: 0, sm: "40px", md: "40px" },
+              marginRight: { xs: 0, sm: "10px", md: "10px" },
+              margin: "10px",
             }}
           />
           <TextField
@@ -153,6 +153,9 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             variant="outlined"
             name="RepEmail"
             onChange={handleChangeEmail}
+            sx={{
+              margin: "10px",
+            }}
           />
         </Grid>
 
@@ -162,9 +165,6 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             flexDirection: { xs: "column", sm: "row", md: "row" },
             display: "flex",
             justifyContent: "center",
-            "& > *": {
-              margin: "10px",
-            },
           }}
         >
           <FormControl
@@ -192,6 +192,9 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             variant="outlined"
             name="passport"
             onChange={handleChange}
+            sx={{
+              margin: "10px",
+            }}
           />
         </Grid>
         <Grid
@@ -200,9 +203,6 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             flexDirection: { xs: "column", sm: "row", md: "row" },
             display: "flex",
             justifyContent: "center",
-            "& > *": {
-              margin: "10px",
-            },
           }}
         >
           <FormControl
@@ -210,6 +210,7 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             sx={{
               width: { xs: "331px", sm: "222px", md: "222px" },
               margin: "10px",
+              marginRight: { xs: 0, sm: "10px", md: "10px" },
             }}
           >
             <InputLabel>Estimated Arrival Time</InputLabel>
@@ -254,9 +255,6 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             flexDirection: { xs: "column", sm: "row", md: "row" },
             display: "flex",
             justifyContent: "center",
-            "& > *": {
-              margin: "10px",
-            },
           }}
         >
           <TextField
