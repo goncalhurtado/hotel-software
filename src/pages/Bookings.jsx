@@ -23,8 +23,6 @@ const Bookings = () => {
     nigths: "",
   });
 
-  const [bookingDate, setBookingDate] = useState({});
-
   return (
     <div>
       {!selected.booked ? (
@@ -42,15 +40,20 @@ const Bookings = () => {
             />
           </Box>
           <Box>
-            <Grid container>
-              <Grid item lg={8}>
+            <Grid
+              container
+              sx={{
+                display: { xs: "flex", md: "flex" },
+                flexDirection: { xs: "column-reverse", md: "initial" },
+              }}
+            >
+              <Grid item xs={12} sm={12} md={8}>
                 <Grid container>
                   {availables.categories.availables?.map((category) => (
                     <RoomBookingCard
                       key={category._id}
                       category={category}
                       setSelected={setSelected}
-                      // availables={availables}
                     />
                   ))}
                   {availables.categories.soldout?.map((category) => (
@@ -61,8 +64,14 @@ const Bookings = () => {
                   ))}
                 </Grid>
               </Grid>
-              <Grid item lg={4}>
-                <Grid container>
+              <Grid item xs={12} sm={12} md={4}>
+                <Grid
+                  sx={{
+                    display: { xs: "flex", md: "initial" },
+                    justifyContent: { xs: "center", md: "initial" },
+                    marginBottom: "20px",
+                  }}
+                >
                   <BookingPreview
                     selected={selected}
                     setSelected={setSelected}
