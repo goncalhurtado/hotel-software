@@ -10,20 +10,23 @@ const BookingPreview = ({ selected, setSelected }) => {
     <Grid item lg={12}>
       <Card>
         <CardContent>
-          <Typography>Cantidad de Noches: </Typography>
+          <Typography>Nights: {selected.nights}</Typography>
           <Typography>
-            Tipo de Habitacion:{" "}
-            {selected.selected ? selected.category.name : ""}
+            Category: {selected.selected ? selected.category.name : ""}
           </Typography>
           <Typography>
-            Precio: ${selected.selected ? selected.category.price : ""}
+            Price Per Night: ${selected.selected ? selected.category.price : ""}
+          </Typography>
+          <Typography variant="h6">
+            Total: $
+            {selected.selected ? selected.category.price * selected.nights : ""}
           </Typography>
           <Button
-            disabled={selected.selected ? false : true}
+            disabled={!selected.selected}
             variant="contained"
             onClick={() => setSelected({ ...selected, booked: true })}
           >
-            Reservar
+            Book
           </Button>
         </CardContent>
       </Card>

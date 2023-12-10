@@ -3,7 +3,10 @@ import { Box, Button } from "@mui/material";
 import SelectCapacity from "../../SelectCapacity";
 import DatePickerBooking from "./DatePickerBooking";
 import { LoadingButton } from "@mui/lab";
-import { searchAvailableRooms } from "../../../helpers/booking";
+import {
+  nightsCalculator,
+  searchAvailableRooms,
+} from "../../../helpers/booking";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CloseIcon from "@mui/icons-material/Close";
 import DatePreview from "./DatePreview";
@@ -24,6 +27,7 @@ const SearchForm = ({ setAvailables, selected, setSelected }) => {
       check_in: date.start_date,
       check_out: date.end_date,
       capacity: capacity,
+      nights: nightsCalculator(date.start_date, date.end_date),
     });
 
     const queryString = `search?check_in=${date.start_date}&check_out=${date.end_date}&capacity=${capacity}`;

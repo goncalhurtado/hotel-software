@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
 import SearchForm from "../components/booking/search/SearchForm";
 import RoomBookingCard from "../components/booking/RoomBookingCard";
@@ -6,6 +6,7 @@ import RoomBookingCardSoldOut from "../components/booking/RoomBookingCardSoldOut
 import BookingPreview from "../components/booking/BookingPreview";
 import Grid from "@mui/material/Grid";
 import Reservation from "../components/Reservation";
+import { nightsCalculator } from "../helpers/booking.js";
 
 const Bookings = () => {
   const [availables, setAvailables] = useState({
@@ -20,8 +21,19 @@ const Bookings = () => {
     check_in: "",
     check_out: "",
     capacity: "",
-    nigths: "",
+    nigths: 0,
   });
+  console.log(selected);
+
+  useEffect(() => {
+    setSelected((prevSelected) => ({
+      ...prevSelected,
+      nights: nightsCalculator(prevSelected.check_in, prevSelected.check_out),
+      // price:
+      // prevSelected.category.price *
+      // nightsCalculator(prevSelected.check_in, prevSelected.check_out),
+    }));
+  }, [selected.check_in, selected.check_out]);
 
   return (
     <div>

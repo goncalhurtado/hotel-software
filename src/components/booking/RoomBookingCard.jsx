@@ -50,6 +50,7 @@ const RoomBookingCard = ({ category, setSelected }) => {
               <Typography variant="body2" color="text.secondary">
                 {category.description}
               </Typography>
+
               <Button
                 variant="contained"
                 onClick={() =>
@@ -59,6 +60,7 @@ const RoomBookingCard = ({ category, setSelected }) => {
                     category: category,
                   }))
                 }
+                sx={{ marginTop: "10px" }}
               >
                 Seleccionar
               </Button>
