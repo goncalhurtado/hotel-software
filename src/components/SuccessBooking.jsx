@@ -11,7 +11,12 @@ const SuccessBooking = ({ info }) => {
 
   return (
     <Box display={"flex"} justifyContent={"center"} margin={"auto"}>
-      <Card sx={{ maxWidth: 800, marginTop: "20px" }}>
+      <Card
+        sx={{
+          width: { xs: "90%", sm: "594px", md: "594px" },
+          marginTop: "20px",
+        }}
+      >
         <CardContent>
           <Box display="flex" flexDirection={"column"}>
             <Typography variant="h4" textAlign={"center"}>
@@ -33,7 +38,11 @@ const SuccessBooking = ({ info }) => {
                 component="div"
               ></Typography>
 
-              <Button variant="contained" onClick={() => navigate("/")}>
+              <Button
+                sx={{ display: "flex", margin: "auto" }}
+                variant="contained"
+                onClick={() => navigate("/")}
+              >
                 Return
               </Button>
             </Box>
