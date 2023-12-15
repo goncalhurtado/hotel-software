@@ -10,24 +10,32 @@ const BookingPreview = ({ selected, setSelected }) => {
     <Grid item lg={12}>
       <Card sx={{ width: { xs: "250px", sm: "250px", md: "250px" } }}>
         <CardContent>
-          <Typography>Nights: {selected.nights}</Typography>
-          <Typography>
-            Category: {selected.selected ? selected.category.name : ""}
-          </Typography>
-          <Typography>
-            Price Per Night: ${selected.selected ? selected.category.price : ""}
-          </Typography>
-          <Typography variant="h6">
-            Total: ${selected.selected ? selected.price : ""}
-          </Typography>
-          <Button
-            disabled={!selected.selected}
-            variant="contained"
-            onClick={() => setSelected({ ...selected, booked: true })}
-            sx={{ display: "flex", margin: "auto" }}
-          >
-            Book
-          </Button>
+          {selected.selected ? (
+            <>
+              {" "}
+              <Typography>Nights: {selected.nights}</Typography>
+              <Typography>
+                Category: {selected.selected ? selected.category.name : ""}
+              </Typography>
+              <Typography>
+                Price Per Night: $
+                {selected.selected ? selected.category.price : ""}
+              </Typography>
+              <Typography variant="h6">
+                Total: ${selected.selected ? selected.price : ""}
+              </Typography>
+              <Button
+                disabled={!selected.selected}
+                variant="contained"
+                onClick={() => setSelected({ ...selected, booked: true })}
+                sx={{ display: "flex", margin: "auto" }}
+              >
+                Book
+              </Button>{" "}
+            </>
+          ) : (
+            "Selecciona algo primero mi reyk"
+          )}
         </CardContent>
       </Card>
     </Grid>
