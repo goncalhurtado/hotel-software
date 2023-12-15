@@ -119,7 +119,6 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
         </Grid>
         <Grid
           sx={{
-            display: "flex",
             flexDirection: { xs: "column", sm: "row", md: "row" },
             display: "flex",
             justifyContent: "center",
@@ -159,7 +158,6 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
         </Grid>
         <Grid
           sx={{
-            display: "flex",
             flexDirection: { xs: "column", sm: "row", md: "row" },
             display: "flex",
             justifyContent: "center",
@@ -192,7 +190,6 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
 
         <Grid
           sx={{
-            display: "flex",
             flexDirection: { xs: "column", sm: "row", md: "row" },
             display: "flex",
             justifyContent: "center",
@@ -240,7 +237,6 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
         </Grid>
         <Grid
           sx={{
-            display: "flex",
             flexDirection: { xs: "column", sm: "row", md: "row" },
             display: "flex",
             justifyContent: "center",
@@ -292,7 +288,6 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
         </Grid>
         <Grid
           sx={{
-            display: "flex",
             flexDirection: { xs: "column", sm: "row", md: "row" },
             display: "flex",
             justifyContent: "center",

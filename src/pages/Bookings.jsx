@@ -7,6 +7,7 @@ import BookingPreview from "../components/booking/BookingPreview";
 import Grid from "@mui/material/Grid";
 import Reservation from "../components/Reservation";
 import { nightsCalculator } from "../helpers/booking.js";
+import Typography from "@mui/material/Typography";
 
 const Bookings = () => {
   const [availables, setAvailables] = useState({
@@ -60,6 +61,7 @@ const Bookings = () => {
               }}
             >
               <Grid item xs={12} sm={12} md={8}>
+                <Typography>Room Result</Typography>
                 <Grid container>
                   {availables.categories.availables?.map((category) => (
                     <RoomBookingCard

@@ -13,7 +13,14 @@ export const createCategory = async(formData, getCategories, setLoading, setCrea
     setLoading(true);
 
     try {
-        const response = await axiosInstance.post(`/category`, data);
+        const response = await axiosInstance.post(`/category`, data, {
+            headers: {
+                // Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                "Content-Type": "multipart/form-data",
+
+            }
+        });
+
         Swal.fire({
             title: response.data.message,
             icon: "success",
