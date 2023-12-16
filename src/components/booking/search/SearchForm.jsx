@@ -11,6 +11,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CloseIcon from "@mui/icons-material/Close";
 import DatePreview from "./DatePreview";
 import Grid from "@mui/material/Grid";
+import { IconButton } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 const SearchForm = ({ setAvailables, selected, setSelected }) => {
   const [loading, setLoading] = useState(false);
@@ -120,7 +122,7 @@ const SearchForm = ({ setAvailables, selected, setSelected }) => {
             sx={{ marginTop: { xs: "5px", sm: "24px" } }}
             onClick={handleSubmit}
           >
-            Search
+            Search <SearchIcon style={{ marginLeft: "5px" }} />
           </LoadingButton>
         </Box>
       </Box>
