@@ -5,26 +5,33 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { getAdminContact } from "../../helpers/admin/adminContact";
 import ContactTable from "../../components/admin/contact/ContactTable";
+import { set } from "date-fns";
 
 const AdminContact = () => {
   const PENDING = "pending";
   const ANSWERED = "answered";
   const ALL = "all";
-
   const [value, setValue] = useState(ALL);
-
-  const [data, setData] = useState("");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [noResult, setNoResult] = useState(false);
 
   const handleChange = (event, newValue) => {
-    console.log(newValue.value);
     setValue(newValue);
   };
 
   const getContacts = async (query) => {
     try {
-      const response = await getAdminContact(query);
-      console.log(response);
-      // setData(response.data.categories);
+      setLoading(true);
+      const contacts = await getAdminContact(query);
+
+      setLoading(false);
+      if (contacts.length === 0) {
+        setNoResult(true);
+        return;
+      }
+      setData(contacts);
+      setNoResult(false);
     } catch (error) {
       console.log(error);
     }
@@ -63,18 +70,29 @@ const AdminContact = () => {
               value={PENDING}
               label="Pending"
               onClick={() => getContacts(PENDING)}
+              disabled={loading}
             />
             <Tab
               value={ANSWERED}
               label="Answered"
               onClick={() => getContacts(ANSWERED)}
+              disabled={loading}
             />
-            <Tab value={ALL} label="All" onClick={() => getContacts(ALL)} />
+            <Tab
+              value={ALL}
+              label="All"
+              onClick={() => getContacts(ALL)}
+              disabled={loading}
+            />
           </Tabs>
         </Box>
       </Box>
       {/* <Box></Box> */}
-      <ContactTable data={data} />
+      {!noResult ? (
+        <ContactTable data={data} getContacts={getContacts} />
+      ) : (
+        <p>No result</p>
+      )}
     </Box>
   );
 };
