@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 
 const ContactForm = ({ setFormData, formData }) => {
   const [error, setError] = useState({ status: false, message: "" });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setError({ status: false, message: "" });
@@ -87,15 +88,6 @@ const ContactForm = ({ setFormData, formData }) => {
           onChange={handleChange}
           name="phone"
           label="Phone Number"
-          //   onKeyDown={(event) => {
-          //     if (
-          //       !/[0-9]/.test(event.key) &&
-          //       event.key !== "Backspace" &&
-          //       event.key !== "Delete"
-          //     ) {
-          //       event.preventDefault();
-          //     }
-          //   }}
           sx={{
             marginRight: { xs: "10px", sm: "10px", md: "10px" },
             margin: "10px",
@@ -128,7 +120,7 @@ const ContactForm = ({ setFormData, formData }) => {
         <Typography>{error.status && error.message}</Typography>
       </Box>
       <LoadingButton
-        //   loading={!loading ? false : true}
+        loading={!loading ? false : true}
         variant="contained"
         sx={{
           display: "flex",

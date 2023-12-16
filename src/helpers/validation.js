@@ -2,8 +2,31 @@ export const validateBooking = (formData, setError) => {
 
     const { firstName, lastName, email, phone, country, passportType, passport, arrivalTime, paymentMethod } = formData.info;
 
-    if (!firstName || !lastName || !email || !phone || !country || !passportType || !passport || !arrivalTime || !paymentMethod) {
+    if (!firstName || !lastName || !email || !country || !passportType || !arrivalTime || !paymentMethod) {
         setError({ status: true, message: 'Please fill all the required fields.' });
+        return false;
+    }
+
+    if (!phone) {
+        setError({ status: true, message: 'Please enter a valid phone number without special characters.' });
+        return false;
+    }
+    const phoneRegex = /^\d{1,20}$/;
+
+    if (!phoneRegex.test(phone)) {
+        setError({ status: true, message: `The phone number cannot exceed 20 characters` });
+
+        return false;
+    }
+
+    if (!passport) {
+        setError({ status: true, message: 'Please enter a valid passport number without special characters.' });
+        return false;
+    }
+
+    const passportRegex = /^\d{1,20}$/;
+    if (!passportRegex.test(passport)) {
+        setError({ status: true, message: 'The passport number cannot exceed 20 characters' });
         return false;
     }
 
@@ -14,13 +37,7 @@ export const validateBooking = (formData, setError) => {
         return false;
     }
 
-    const phoneRegex = /^\d{1,20}$/;
 
-    if (!phoneRegex.test(phone)) {
-        setError({ status: true, message: 'Please enter a valid phone number without special characters.' });
-
-        return false;
-    }
 
     return true;
 
