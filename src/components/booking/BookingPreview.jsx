@@ -4,6 +4,8 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { Box, Button } from "@mui/material";
+import Alert from "@mui/material/Alert";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
 const BookingPreview = ({ selected, setSelected }) => {
   return (
@@ -34,7 +36,12 @@ const BookingPreview = ({ selected, setSelected }) => {
               </Button>{" "}
             </>
           ) : (
-            "Selecciona algo primero mi reyk"
+            <Box display={"flex"} alignItems={"center"}>
+              <InfoOutlinedIcon color="info" />
+              <Typography variant="body2" marginLeft={"10px"}>
+                First search, then select a category
+              </Typography>
+            </Box>
           )}
         </CardContent>
       </Card>

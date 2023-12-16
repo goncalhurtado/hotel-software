@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 const Bookings = () => {
   const [availables, setAvailables] = useState({
     categories: [],
-    rooms: [], //rooms solo para poder confirmar las reservas restantes, despues lo puedo eliminar
+    // rooms: [], //rooms solo para poder confirmar las reservas restantes, despues lo puedo eliminar
   });
 
   const [selected, setSelected] = useState({
@@ -24,15 +24,11 @@ const Bookings = () => {
     capacity: "",
     nigths: 0,
   });
-  // console.log(selected);
 
   useEffect(() => {
     setSelected((prevSelected) => ({
       ...prevSelected,
       nights: nightsCalculator(prevSelected.check_in, prevSelected.check_out),
-      // price:
-      // prevSelected.category.price *
-      // nightsCalculator(prevSelected.check_in, prevSelected.check_out),
     }));
   }, [selected.check_in, selected.check_out]);
 
@@ -61,7 +57,8 @@ const Bookings = () => {
               }}
             >
               <Grid item xs={12} sm={12} md={8}>
-                <Typography>Room Result</Typography>
+                <Typography marginLeft={"15px"}>Search results</Typography>
+
                 <Grid container>
                   {availables.categories.availables?.map((category) => (
                     <RoomBookingCard

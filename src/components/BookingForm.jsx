@@ -9,7 +9,7 @@ import { arrivalTimes } from "../helpers/information";
 import { LoadingButton } from "@mui/lab";
 import { postBooking } from "../helpers/booking";
 import Grid from "@mui/material/Grid";
-import { validate } from "../helpers/validation";
+import { validateBooking } from "../helpers/validation";
 import Typography from "@mui/material/Typography";
 
 const BookingForm = ({ selected, setSuccessInfo }) => {
@@ -58,12 +58,13 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
     if (formData.info.email !== repeatEmail) {
       setError({ status: true, message: "Emails don't match" });
       return;
     }
 
-    const validation = validate(formData, setError);
+    const validation = validateBooking(formData, setError);
     console.log(validation);
     if (!validation) {
       return;
@@ -82,7 +83,7 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
           margin: "auto",
           marginTop: "20px",
         }}
-        noValidate
+        novalidateBooking
         autoComplete="off"
         onSubmit={handleSubmit}
       >
@@ -125,19 +126,19 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
           }}
         >
           <TextField
-            type="text"
+            type="number"
             onChange={handleChange}
             name="phone"
             label="Phone Number"
-            onKeyDown={(event) => {
-              if (
-                !/[0-9]/.test(event.key) &&
-                event.key !== "Backspace" &&
-                event.key !== "Delete"
-              ) {
-                event.preventDefault();
-              }
-            }}
+            // onKeyDown={(event) => {
+            //   if (
+            //     !/[0-9]/.test(event.key) &&
+            //     event.key !== "Backspace" &&
+            //     event.key !== "Delete"
+            //   ) {
+            //     event.preventDefault();
+            //   }
+            // }}
             sx={{
               marginRight: { xs: "10px", sm: "10px", md: "10px" },
               margin: "10px",
@@ -215,20 +216,20 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
           </FormControl>
 
           <TextField
-            type="text"
+            type="number"
             label="Number"
             variant="outlined"
             name="passport"
             inputProps={{ maxLength: 20 }}
-            onKeyDown={(event) => {
-              if (
-                !/[0-9]/.test(event.key) &&
-                event.key !== "Backspace" &&
-                event.key !== "Delete"
-              ) {
-                event.preventDefault();
-              }
-            }}
+            // onKeyDown={(event) => {
+            //   if (
+            //     !/[0-9]/.test(event.key) &&
+            //     event.key !== "Backspace" &&
+            //     event.key !== "Delete"
+            //   ) {
+            //     event.preventDefault();
+            //   }
+            // }}
             onChange={handleChange}
             sx={{
               margin: "10px",
