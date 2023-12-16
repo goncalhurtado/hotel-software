@@ -10,9 +10,9 @@ import Rooms from "./pages/Rooms";
 import Contact from "./pages/Contact";
 import Admin from "./pages/admin/Admin";
 import AdminCategories from "./pages/admin/AdminCategories";
-
 import AdminRooms from "./pages/admin/AdminRooms";
 import AdminBookings from "./pages/admin/AdminBookings";
+import AdminContact from "./pages/admin/AdminContact";
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
@@ -30,8 +30,8 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/bookings" element={<AdminBookings />} />
           <Route path="/admin/categories" element={<AdminCategories />} />
-          {/* <Route path="/admin/categories/create" element={<CreateCategory />} /> */}
           <Route path="/admin/rooms" element={<AdminRooms />} />
+          <Route path="/admin/contact" element={<AdminContact />} />
         </Route>
       </Routes>
     </>

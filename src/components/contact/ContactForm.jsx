@@ -6,6 +6,7 @@ import { useState } from "react";
 import { validateContact } from "../../helpers/validation";
 import { LoadingButton } from "@mui/lab";
 import Typography from "@mui/material/Typography";
+import { postContact } from "../../helpers/contact";
 
 const ContactForm = ({ setFormData, formData }) => {
   const [error, setError] = useState({ status: false, message: "" });
@@ -26,8 +27,7 @@ const ContactForm = ({ setFormData, formData }) => {
     if (!validateContact(formData, setError)) {
       return;
     }
-
-    console.log(formData, "exito");
+    postContact(formData, setLoading);
   };
 
   return (
