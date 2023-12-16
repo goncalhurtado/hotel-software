@@ -130,15 +130,6 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             onChange={handleChange}
             name="phone"
             label="Phone Number"
-            // onKeyDown={(event) => {
-            //   if (
-            //     !/[0-9]/.test(event.key) &&
-            //     event.key !== "Backspace" &&
-            //     event.key !== "Delete"
-            //   ) {
-            //     event.preventDefault();
-            //   }
-            // }}
             sx={{
               marginRight: { xs: "10px", sm: "10px", md: "10px" },
               margin: "10px",
@@ -221,15 +212,6 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             variant="outlined"
             name="passport"
             inputProps={{ maxLength: 20 }}
-            // onKeyDown={(event) => {
-            //   if (
-            //     !/[0-9]/.test(event.key) &&
-            //     event.key !== "Backspace" &&
-            //     event.key !== "Delete"
-            //   ) {
-            //     event.preventDefault();
-            //   }
-            // }}
             onChange={handleChange}
             sx={{
               margin: "10px",
