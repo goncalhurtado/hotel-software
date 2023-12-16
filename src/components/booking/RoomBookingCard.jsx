@@ -52,7 +52,7 @@ const RoomBookingCard = ({ category, setSelected }) => {
               </Typography>
 
               <Button
-                variant="contained"
+                variant="outlined"
                 onClick={() =>
                   setSelected((prevSelected) => ({
                     ...prevSelected,

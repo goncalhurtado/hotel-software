@@ -9,7 +9,7 @@ import { arrivalTimes } from "../helpers/information";
 import { LoadingButton } from "@mui/lab";
 import { postBooking } from "../helpers/booking";
 import Grid from "@mui/material/Grid";
-import { validate } from "../helpers/validation";
+import { validateBooking } from "../helpers/validation";
 import Typography from "@mui/material/Typography";
 
 const BookingForm = ({ selected, setSuccessInfo }) => {
@@ -63,7 +63,7 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
       return;
     }
 
-    const validation = validate(formData, setError);
+    const validation = validateBooking(formData, setError);
     console.log(validation);
     if (!validation) {
       return;
@@ -82,7 +82,7 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
           margin: "auto",
           marginTop: "20px",
         }}
-        noValidate
+        novalidateBooking
         autoComplete="off"
         onSubmit={handleSubmit}
       >

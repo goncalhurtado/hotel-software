@@ -56,7 +56,7 @@ const SearchForm = ({ setAvailables, selected, setSelected }) => {
             width: "100%",
             left: "0",
             marginTop: "25px",
-            marginLeft: { xs: "0px", sm: "10px", md: "60px" },
+            marginLeft: { xs: "0px", sm: "10px", md: "30px" },
           }}
         >
           <Box
@@ -122,7 +122,7 @@ const SearchForm = ({ setAvailables, selected, setSelected }) => {
             sx={{ marginTop: { xs: "5px", sm: "24px" } }}
             onClick={handleSubmit}
           >
-            Search <SearchIcon style={{ marginLeft: "5px" }} />
+            Search <SearchIcon />
           </LoadingButton>
         </Box>
       </Box>
