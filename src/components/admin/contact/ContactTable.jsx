@@ -114,7 +114,11 @@ const ContactTable = ({ data, getContacts }) => {
   return (
     <>
       <>
-        <ModalContact modal={modal} setModal={setModal} />
+        <ModalContact
+          modal={modal}
+          setModal={setModal}
+          getContacts={getContacts}
+        />
         <DataTable
           data={contactTable}
           columns={columns}

@@ -3,7 +3,7 @@ import Modal from "@mui/material/Modal";
 import React, { useState } from "react";
 import RespondContactForm from "./RespondContactForm";
 
-const ModalContact = ({ modal, setModal }) => {
+const ModalContact = ({ modal, setModal, getContacts }) => {
   const style = {
     position: "absolute",
     top: "50%",
@@ -34,7 +34,11 @@ const ModalContact = ({ modal, setModal }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <RespondContactForm data={modal.data} />
+          <RespondContactForm
+            data={modal.data}
+            setModal={setModal}
+            getContacts={getContacts}
+          />
         </Box>
       </Modal>
     </div>

@@ -7,18 +7,22 @@ import { LoadingButton } from "@mui/lab";
 import { openingResponseContact } from "../../../helpers/admin/responseHelpers";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { postResponse } from "../../../helpers/admin/adminContact";
 
-const RespondContactForm = ({ data }) => {
+const RespondContactForm = ({ data, setModal, getContacts }) => {
   const responseInitial = openingResponseContact(data.firstName);
   const [checked, setChecked] = useState(true);
 
   const [emailData, setEmailData] = useState({
+    id: data._id,
     email: data.email,
     subject: "Response regarding your contact",
     response: responseInitial,
     firstName: data.firstName,
     setAnswered: checked,
+    status: data.status,
   });
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({
     state: false,
@@ -34,11 +38,9 @@ const RespondContactForm = ({ data }) => {
     setError({ state: false, message: "" });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    console.log(emailData);
-    setLoading(false);
+    postResponse(emailData, setLoading, setModal, getContacts);
   };
 
   return (
