@@ -11,11 +11,12 @@ export const getAdminContact = async(query = "all") => {
 }
 
 
-export const setAnswered = async(id, setLoading) => {
+export const setAnswered = async(row, setLoading, getContact) => {
     try {
         setLoading(true);
-        const response = await axiosInstance.put(`/admin/contacts/answered/${id}`);
+        const response = await axiosInstance.put(`/admin/contacts/answered/${row._id}`);
         setLoading(false);
+        getContact(row.status);
         return response.data;
     } catch (error) {
         console.log(error);
@@ -23,11 +24,12 @@ export const setAnswered = async(id, setLoading) => {
     }
 }
 
-export const setPending = async(id, setLoading) => {
+export const setPending = async(row, setLoading, getContact) => {
     try {
         setLoading(true);
-        const response = await axiosInstance.put(`/admin/contacts/pending/${id}`);
+        const response = await axiosInstance.put(`/admin/contacts/pending/${row._id}`);
         setLoading(false);
+        getContact(row.status);
         return response.data;
     } catch (error) {
         console.log(error);
@@ -35,11 +37,12 @@ export const setPending = async(id, setLoading) => {
     }
 }
 
-export const deleteContact = async(id, setLoading) => {
+export const deleteContact = async(row, setLoading, getContact) => {
     try {
         setLoading(true);
-        const response = await axiosInstance.delete(`/admin/contacts/${id}`);
+        const response = await axiosInstance.delete(`/admin/contacts/${row._id}`);
         setLoading(false);
+        getContact(row.status);
         return response.data;
     } catch (error) {
         console.log(error);

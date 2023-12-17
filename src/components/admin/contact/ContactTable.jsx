@@ -76,8 +76,8 @@ const ContactTable = ({ data, getContacts }) => {
             }}
             onClick={() => {
               row.status === "pending"
-                ? setAnswered(row._id, setLoading)
-                : setPending(row._id, setLoading);
+                ? setAnswered(row, setLoading, getContacts)
+                : setPending(row, setLoading, getContacts);
             }}
           >
             {row.status === "pending" ? (
