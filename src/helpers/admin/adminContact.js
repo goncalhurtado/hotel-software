@@ -10,6 +10,16 @@ export const getAdminContact = async(query = "all") => {
     }
 }
 
+export const getContactsReport = async() => {
+    try {
+        const response = await axiosInstance.get(`/admin/contacts/pending/reports`);
+        console.log(response);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 export const setAnswered = async(row, setLoading, getContact) => {
     try {

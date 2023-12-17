@@ -11,7 +11,7 @@ const AdminContact = () => {
   const PENDING = "pending";
   const ANSWERED = "answered";
   const ALL = "all";
-  const [value, setValue] = useState(ALL);
+  const [value, setValue] = useState(PENDING);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [noResult, setNoResult] = useState(false);
@@ -91,7 +91,7 @@ const AdminContact = () => {
       {!noResult ? (
         <ContactTable data={data} getContacts={getContacts} />
       ) : (
-        <p>No result</p>
+        <p>You dont have any request contact with this filter</p>
       )}
     </Box>
   );
