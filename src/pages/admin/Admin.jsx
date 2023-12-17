@@ -14,7 +14,7 @@ const Admin = () => {
     answered: "",
   });
 
-  const [loading, setLoading] = useState(true); // Set initial state to true
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -59,7 +59,7 @@ const Admin = () => {
 
           {loading ? (
             <Alert icon={false} severity="success">
-              Cargando
+              Loading ...
             </Alert>
           ) : (
             <>

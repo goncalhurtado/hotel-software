@@ -10,8 +10,14 @@ import {
 import PendingActionsOutlinedIcon from "@mui/icons-material/PendingActionsOutlined";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
+import ModalContact from "./ModalContact";
 
 const ContactTable = ({ data, getContacts }) => {
+  const [modal, setModal] = useState({
+    state: false,
+    data: {},
+  });
+
   const [loading, setLoading] = useState(false);
   const [contactTable, setContactTable] = useState([]);
   const columns = [
@@ -23,7 +29,6 @@ const ContactTable = ({ data, getContacts }) => {
     },
     {
       name: "Name",
-      selector: (row) => row.name,
       cell: (row) => (
         <div>
           <p>
@@ -31,19 +36,23 @@ const ContactTable = ({ data, getContacts }) => {
           </p>
         </div>
       ),
-      sortable: true,
       width: "150px",
     },
     {
       name: "Email",
-      selector: (row) => row.email,
-      sortable: true,
+      cell: (row) => (
+        <p
+          style={{ cursor: "pointer", textDecoration: "underline" }}
+          onClick={() => setModal({ state: true, data: row })}
+        >
+          {row.email}
+        </p>
+      ),
       width: "200px",
     },
     {
       name: "Phone",
-      selector: (row) => row.phone,
-      sortable: true,
+      cell: (row) => <p>{row.phone}</p>,
       width: "100px",
     },
     {
@@ -54,7 +63,6 @@ const ContactTable = ({ data, getContacts }) => {
           <p style={{ width: "100%" }}>{row.message}</p>
         </div>
       ),
-      sortable: true,
       width: "200px",
     },
     {
@@ -70,7 +78,6 @@ const ContactTable = ({ data, getContacts }) => {
           <LoadingButton
             loading={!loading ? false : true}
             variant={row.status === "pending" ? "contained" : "outlined"}
-            //   color={row.status === "pending" ? "primary" : "secondary"}
             sx={{
               width: { xs: "50%", sm: "20%", md: "100px" },
             }}
@@ -107,6 +114,7 @@ const ContactTable = ({ data, getContacts }) => {
   return (
     <>
       <>
+        <ModalContact modal={modal} setModal={setModal} />
         <DataTable
           data={contactTable}
           columns={columns}
