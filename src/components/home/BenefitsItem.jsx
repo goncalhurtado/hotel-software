@@ -11,7 +11,14 @@ const BenefitsItem = ({ data }) => {
       <Typography textAlign={"center"} variant="h6" color="#FFFFFF">
         {data.title}
       </Typography>
-      <Typography textAlign={"center"} variant="body2" color="#9E9E9E">
+      <Typography
+        textAlign={"center"}
+        variant="body2"
+        color="#9E9E9E"
+        display={"flex"}
+        justifyContent={"center"}
+        sx={{ width: "213px" }}
+      >
         {data.description}
       </Typography>
     </Box>

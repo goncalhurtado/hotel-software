@@ -13,27 +13,27 @@ const Benefits = () => {
     {
       title: "FREE CANCELLATION",
       description: "Cancel up to 7 days before your arrival at no cost",
-      img: <CheckCircleIcon />,
+      img: <CheckCircleIcon sx={{ fontSize: "50px" }} />,
     },
     {
       title: "BEST ONLINE PRICE",
       description: "Always the best price on our website",
-      img: <SellIcon />,
+      img: <SellIcon sx={{ fontSize: "50px" }} />,
     },
     {
       title: "SECURE BOOKINGS",
       description: "Make your reservation securely on our website",
-      img: <LockIcon />,
+      img: <LockIcon sx={{ fontSize: "50px" }} />,
     },
     {
       title: "PAY AT THE HOTEL",
       description: "No charges until your arrival (according to the rate)",
-      img: <RoomServiceIcon />,
+      img: <RoomServiceIcon sx={{ fontSize: "50px" }} />,
     },
   ];
   return (
-    <Box sx={{ backgroundColor: "#262626" }}>
-      <Box>
+    <Box sx={{ backgroundColor: "#262626", padding: "20px" }}>
+      <Box sx={{ paddingBottom: "20px" }}>
         <Typography textAlign={"center"} variant="h5" color="#FFFFFF">
           BENEFITS OF BOOKING WITH US
         </Typography>
@@ -44,7 +44,7 @@ const Benefits = () => {
       <Grid container display={"flex"} justifyContent={"center"}>
         {benefits.map((benefit, index) => {
           return (
-            <Grid item key={index}>
+            <Grid item key={index} sx={{ padding: "20px" }}>
               <BenefitsItem data={benefit} />
             </Grid>
           );
