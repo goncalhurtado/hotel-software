@@ -2,6 +2,7 @@ import React from "react";
 import Carousel from "react-material-ui-carousel";
 import { Paper, Button } from "@mui/material";
 import { Typography } from "@mui/material";
+import Box from "@mui/material/Box";
 
 const CarouselHome = () => {
   const items = [
@@ -31,11 +32,24 @@ const CarouselHome = () => {
   );
   function Item(props) {
     return (
-      <Paper style={{ position: "relative" }}>
+      <Box
+        style={{
+          height: "650px",
+          position: "relative",
+          padding: "0px",
+          margin: "0",
+        }}
+        padding={0}
+      >
         <img
           src={props.item.image}
           alt={props.item.description}
-          style={{ width: "100%", height: "700px", filter: "brightness(50%)" }}
+          style={{
+            width: "100%",
+            height: "100%",
+            filter: "brightness(50%)",
+            padding: "0px",
+          }}
         />
         <Typography
           variant="h2"
@@ -48,11 +62,13 @@ const CarouselHome = () => {
             transform: "translate(-50%, -50%)",
             color: "white",
             textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+            padding: "0px",
+            margin: "0px",
           }}
         >
           HOTEL GONCAL
         </Typography>
-      </Paper>
+      </Box>
     );
   }
 };
