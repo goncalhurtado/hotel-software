@@ -13,6 +13,7 @@ import AdminCategories from "./pages/admin/AdminCategories";
 import AdminRooms from "./pages/admin/AdminRooms";
 import AdminBookings from "./pages/admin/AdminBookings";
 import AdminContact from "./pages/admin/AdminContact";
+import Footer from "./components/Footer";
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
@@ -34,6 +35,7 @@ function App() {
           <Route path="/admin/contact" element={<AdminContact />} />
         </Route>
       </Routes>
+      <Footer />
     </>
   );
 }
