@@ -77,14 +77,26 @@ const Navbar = ({ isLogged, setIsLogged }) => {
 
   return (
     <AppBar position="static">
+      {isLogged && (
+        <Box style={{ width: "100%", textAlign: "center", background: "red" }}>
+          ADMIN
+        </Box>
+      )}
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
-          <img
-            src="https://res.cloudinary.com/dr2iqnauy/image/upload/v1704579341/hotel-software/logo_hotel_goncal_copia_ouudm1.png"
-            alt="hotel goncal logo"
-            style={{ width: "50px", height: "50px" }}
-          />
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+            }}
+          >
+            <img
+              src="https://res.cloudinary.com/dr2iqnauy/image/upload/v1704579341/hotel-software/logo_hotel_goncal_copia_ouudm1.png"
+              alt="hotel goncal logo"
+              style={{
+                width: "60px",
+              }}
+            />
+          </Box>
           <Typography
             variant="h6"
             noWrap
@@ -157,7 +169,6 @@ const Navbar = ({ isLogged, setIsLogged }) => {
               )}
             </Menu>
           </Box>
-
           <Typography
             variant="h5"
             noWrap
