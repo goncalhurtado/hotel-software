@@ -77,9 +77,26 @@ const Navbar = ({ isLogged, setIsLogged }) => {
 
   return (
     <AppBar position="static">
+      {isLogged && (
+        <Box style={{ width: "100%", textAlign: "center", background: "red" }}>
+          ADMIN
+        </Box>
+      )}
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+            }}
+          >
+            <img
+              src="https://res.cloudinary.com/dr2iqnauy/image/upload/v1704579341/hotel-software/logo_hotel_goncal_copia_ouudm1.png"
+              alt="hotel goncal logo"
+              style={{
+                width: "60px",
+              }}
+            />
+          </Box>
           <Typography
             variant="h6"
             noWrap
@@ -95,7 +112,7 @@ const Navbar = ({ isLogged, setIsLogged }) => {
               textDecoration: "none",
             }}
           ></Typography>
-          {/* HAMBURGUER MENU */}
+
           <Box
             sx={{
               flexGrow: 1,
@@ -152,7 +169,6 @@ const Navbar = ({ isLogged, setIsLogged }) => {
               )}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -168,7 +184,9 @@ const Navbar = ({ isLogged, setIsLogged }) => {
               color: "inherit",
               textDecoration: "none",
             }}
-          ></Typography>
+          >
+            Hotel Goncal
+          </Typography>
           <Box
             sx={{
               flexGrow: 1,
