@@ -6,6 +6,7 @@ import EditBooking from "../../components/admin/bookings/EditBooking";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+import TableSkeleton from "../../components/skeletons/TableSkeleton";
 
 const AdminBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -72,12 +73,20 @@ const AdminBookings = () => {
         </Tabs>
       </Box>
       {!editing.status ? (
-        <TableBookings
-          bookings={bookings}
-          getBookings={getBookings}
-          setModal={setModal}
-          setEditing={setEditing}
-        />
+        <>
+          {loading ? (
+            <Box padding={1}>
+              <TableSkeleton />
+            </Box>
+          ) : (
+            <TableBookings
+              bookings={bookings}
+              getBookings={getBookings}
+              setModal={setModal}
+              setEditing={setEditing}
+            />
+          )}
+        </>
       ) : (
         <EditBooking
           editing={editing}
