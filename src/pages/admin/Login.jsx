@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -5,7 +6,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
+import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
 import { axiosInstance } from "../../config/axiosInstance";
 
@@ -35,16 +36,16 @@ const Login = ({ setIsLogged }) => {
 
       navigate("/admin");
     } catch (error) {
-      console.log(error.response.data);
-      const { message } = error.response.data;
-      setError({ show: true, message });
+      console.log(error.message);
+      const message = error.message || error.response.data;
+      setError({ show: true, message: message });
     }
   };
 
   return (
     <>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
+        {/* <CssBaseline /> */}
         <Box
           sx={{
             marginTop: 8,
