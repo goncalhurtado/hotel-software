@@ -52,9 +52,6 @@ const AdminContact = () => {
 
         <Box
           sx={{
-            // borderBottom: "1px solid black",
-            // borderTop: "1px solid black",
-            // textAlign: "end",
             display: "flex",
             justifyContent: "center",
             marginBottom: "20px",
@@ -87,7 +84,6 @@ const AdminContact = () => {
           </Tabs>
         </Box>
       </Box>
-      {/* <Box></Box> */}
       {!noResult ? (
         <ContactTable data={data} getContacts={getContacts} />
       ) : (
