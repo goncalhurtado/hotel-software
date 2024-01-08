@@ -3,26 +3,74 @@ import TableBookings from "../../components/admin/bookings/TableBookings";
 import { axiosInstance } from "../../config/axiosInstance";
 import ModalBookings from "../../components/admin/bookings/ModalBookings";
 import EditBooking from "../../components/admin/bookings/EditBooking";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
 
 const AdminBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [modal, setModal] = useState({ action: false, data: {} });
   const [editing, setEditing] = useState({ status: false, data: {} });
+  const [loading, setLoading] = useState(false);
+  const UPCOMING = "upcoming";
+  const PAST = "past";
+  const ALL = "all";
+  const [value, setValue] = useState(UPCOMING);
 
-  const getBookings = async () => {
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const getBookings = async (query) => {
+    setLoading(true);
     try {
-      const response = await axiosInstance.get("/bookings");
+      const response = await axiosInstance.get(`/bookings/${query}`);
+      setLoading(false);
 
       setBookings(response.data.formattedBookings);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
   useEffect(() => {
-    getBookings();
+    getBookings(value);
   }, []);
   return (
     <>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "end",
+          marginLeft: "30px",
+        }}
+      >
+        <Tabs
+          value={value}
+          textColor="primary"
+          indicatorColor="primary"
+          onChange={handleChange}
+        >
+          <Tab
+            value={UPCOMING}
+            label="upcoming"
+            onClick={() => getBookings(UPCOMING)}
+            disabled={loading}
+          />
+          <Tab
+            value={PAST}
+            label="past"
+            onClick={() => getBookings(PAST)}
+            disabled={loading}
+          />
+          <Tab
+            value={ALL}
+            label="All"
+            onClick={() => getBookings(ALL)}
+            disabled={loading}
+          />
+        </Tabs>
+      </Box>
       {!editing.status ? (
         <TableBookings
           bookings={bookings}
