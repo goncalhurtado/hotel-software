@@ -13,7 +13,6 @@ export const getAdminContact = async(query = "all") => {
 export const getContactsReport = async() => {
     try {
         const response = await axiosInstance.get(`/admin/contacts/pending/reports`);
-        console.log(response.data.message);
         return response.data;
     } catch (error) {
         console.log(error);
@@ -62,11 +61,10 @@ export const deleteContact = async(row, setLoading, getContacts) => {
 
 
 export const postResponse = async(emailData, setLoading, setModal, getContacts) => {
-    console.log(emailData);
+
     setLoading(true)
     try {
         const response = await axiosInstance.post("/admin/contacts/response", emailData);
-        console.log(response);
         setLoading(false);
         getContacts(emailData.status);
         setModal({ state: false, data: {} })

@@ -53,6 +53,7 @@ const AdminCategories = () => {
     try {
       const response = await axiosInstance.get("/categories");
       setCategories(response.data.categories);
+      console.log(categories);
     } catch (error) {
       console.log(error);
     }
