@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -5,11 +6,13 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
+import Container from "@mui/material/Container";
+import { LoadingButton } from "@mui/lab";
 import { useNavigate } from "react-router-dom";
 import { axiosInstance } from "../../config/axiosInstance";
 
 const Login = ({ setIsLogged }) => {
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ show: false, message: "" });
   const [dataForm, setDataForm] = useState({
     email: "",
@@ -28,23 +31,26 @@ const Login = ({ setIsLogged }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axiosInstance.post("/login", dataForm);
+      setLoading(false);
       const { token } = response.data;
       localStorage.setItem("token", token);
 
       navigate("/admin");
     } catch (error) {
-      console.log(error.response.data);
-      const { message } = error.response.data;
-      setError({ show: true, message });
+      console.log(error);
+      setLoading(false);
+      const message = error.message || error.response.data;
+      setError({ show: true, message: message });
     }
   };
 
   return (
     <>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
+        {/* <CssBaseline /> */}
         <Box
           sx={{
             marginTop: 8,
@@ -87,14 +93,15 @@ const Login = ({ setIsLogged }) => {
               error={error.show ? true : false}
             />
             <Typography color={"red"}>{error.show && error.message}</Typography>
-            <Button
+            <LoadingButton
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              loading={loading}
             >
               Sign In
-            </Button>
+            </LoadingButton>
             <Grid container>
               {/* <Grid item xs>
                 <Link href="#" variant="body2">

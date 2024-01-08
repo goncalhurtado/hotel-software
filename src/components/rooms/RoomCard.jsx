@@ -2,10 +2,10 @@ import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-
 import { Box, Button } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
 import Grid from "@mui/material/Grid";
+import Skeleton from "@mui/material/Skeleton";
 
 const RoomCard = ({ room }) => {
   const capacity = Array.from({ length: room.capacity }, (_, i) => i + 1);
@@ -29,28 +29,46 @@ const RoomCard = ({ room }) => {
         >
           <CardContent>
             <Box display="flex">
-              <Box
-                sx={{
-                  width: { xs: "50%", sm: 300, lg: 350 },
-                  height: { xs: "120px", sm: 200, lg: 233 },
-
-                  marginRight: "20px",
-                }}
-                component="img"
-                alt={room.name}
-                src={room.image}
-              />
-
-              <Box>
+              {room ? (
+                <Box
+                  sx={{
+                    width: { xs: "50%", sm: 300, lg: 350 },
+                    height: { xs: "120px", sm: 200, lg: 233 },
+                    marginRight: "20px",
+                  }}
+                  component="img"
+                  alt={room.name}
+                  src={room.image}
+                />
+              ) : (
+                <Skeleton
+                  sx={{
+                    width: { xs: "50%", sm: 300, lg: 350 },
+                    height: { xs: "120px", sm: 200, lg: 233 },
+                    marginRight: "20px",
+                  }}
+                  variant="rectangular"
+                />
+              )}
+              <Box sx={{ width: "100%" }}>
                 <Typography gutterBottom variant="h5" component="div">
-                  {room.name}
+                  {room ? room.name : <Skeleton />}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  {room.description}
+                  {room ? room.description : <Skeleton />}
                 </Typography>
-                {capacity.map((person) => (
-                  <PersonIcon key={person} />
-                ))}
+                {room ? (
+                  <>
+                    {capacity.map((person) => (
+                      <PersonIcon key={person} />
+                    ))}{" "}
+                  </>
+                ) : (
+                  <>
+                    <Skeleton height={100} />
+                    <Skeleton />
+                  </>
+                )}
               </Box>
             </Box>
           </CardContent>
