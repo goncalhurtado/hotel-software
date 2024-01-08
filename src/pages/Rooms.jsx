@@ -34,9 +34,12 @@ const Rooms = () => {
           Rooms Categories
         </Typography>
         <Grid container>
-          {rooms?.map((room, index) => (
-            <RoomCard room={room} key={index} />
-          ))}
+          {/* {rooms.length === 0 && <Typography>Loading...</Typography>} */}
+          {rooms.length != 0 ? (
+            rooms?.map((room, index) => <RoomCard room={room} key={index} />)
+          ) : (
+            <RoomCard room={false} />
+          )}
         </Grid>
       </Box>
     </Box>
