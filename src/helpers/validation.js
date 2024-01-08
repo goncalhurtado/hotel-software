@@ -66,3 +66,23 @@ export const validateContact = (formData, setError) => {
     return true;
 
 }
+
+export const validateLogin = (dataForm, setError) => {
+
+    const { email, password } = dataForm;
+
+    if (!email || !password) {
+        setError({ show: true, message: 'Please fill all fields.' });
+        return false;
+    }
+
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+    if (!emailRegex.test(email)) {
+        setError({ show: true, message: 'Please enter a valid email address.' });
+        return false;
+    }
+
+    return true;
+
+}
