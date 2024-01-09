@@ -59,3 +59,13 @@ export const deleteBooking = async(row, getBookings) => {
         });
 
 }
+
+export const getBookingsReports = async() => {
+    try {
+        const response = await axiosInstance.get(`/booking/reports`);
+        return response.data;
+
+    } catch (error) {
+        console.log(error);
+    }
+}
