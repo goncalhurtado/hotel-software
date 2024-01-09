@@ -58,14 +58,14 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+
     if (formData.info.email !== repeatEmail) {
       setError({ status: true, message: "Emails don't match" });
       return;
     }
 
     const validation = validateBooking(formData, setError);
-    console.log(validation);
+
     if (!validation) {
       return;
     }

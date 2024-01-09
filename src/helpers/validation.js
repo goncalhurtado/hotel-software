@@ -46,7 +46,7 @@ export const validateBooking = (formData, setError) => {
 export const validateContact = (formData, setError) => {
 
     const { firstName, lastName, email, phone, message } = formData;
-    console.log(formData);
+
     if (!firstName || !lastName || !email || !message) {
         setError({ status: true, message: 'Please fill all the required fields.' });
         return false;

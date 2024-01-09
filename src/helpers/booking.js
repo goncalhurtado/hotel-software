@@ -14,7 +14,7 @@ export const postBooking = async(formData, setLoading, setSuccessInfo) => {
             icon: "success",
             confirmButtonText: "Ok",
         });
-        console.log(response);
+
         const { savedBooking } = response.data;
         setSuccessInfo({
             status: true,
@@ -22,7 +22,7 @@ export const postBooking = async(formData, setLoading, setSuccessInfo) => {
             firstName: savedBooking.info.firstName,
             email: savedBooking.info.email,
         });
-        console.log(response);
+
 
     } catch (error) {
         setLoading(false);
@@ -59,7 +59,7 @@ export const searchAvailableRooms = async(queryString, setLoading, setAvailables
 }
 
 export const nightsCalculator = (checkIn, checkOut) => {
-    console.log(checkIn, checkOut);
+
     if (!checkIn || !checkOut) return 0;
 
     const checkInDate = new Date(checkIn);

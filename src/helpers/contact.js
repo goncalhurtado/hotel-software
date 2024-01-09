@@ -7,7 +7,7 @@ export const postContact = async(formData, setLoading) => {
     setLoading(true)
     try {
         const response = await axiosInstance.post("/contact", formData);
-        console.log(response);
+
         setLoading(false);
         Swal.fire({
             title: "Success",
