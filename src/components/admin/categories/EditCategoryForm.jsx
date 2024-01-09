@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button, Grid } from "@mui/material";
-import "../../../style/admin/categories/CategoriesForm.css";
 
 const EditCategoryForm = ({
   categoryToEdit,
@@ -45,7 +44,7 @@ const EditCategoryForm = ({
               label="Name"
               defaultValue={name}
               variant="outlined"
-              className="nameCategory"
+              sx={{ margin: "5px", width: "350px" }}
               name="name"
               onChange={handleChange}
             />
@@ -54,7 +53,7 @@ const EditCategoryForm = ({
               label="Capacity"
               defaultValue={capacity}
               variant="outlined"
-              className="numberCategory"
+              sx={{ margin: "5px", width: "100px" }}
               type="number"
               name="capacity"
               onChange={handleChange}
@@ -64,7 +63,7 @@ const EditCategoryForm = ({
               label="Price"
               defaultValue={price}
               variant="outlined"
-              className="numberCategory"
+              sx={{ margin: "5px", width: "100px" }}
               type="number"
               name="price"
               onChange={handleChange}
@@ -78,9 +77,10 @@ const EditCategoryForm = ({
               multiline
               rows={5}
               name="description"
-              className="descriptionCategory"
               onChange={handleChange}
               sx={{
+                marginTop: "10px",
+                marginBottom: "10px",
                 width: "590px",
               }}
             />
