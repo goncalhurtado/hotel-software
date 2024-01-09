@@ -14,7 +14,6 @@ const ContactForm = ({ setFormData, formData }) => {
 
   const handleChange = (e) => {
     setError({ status: false, message: "" });
-
     const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,

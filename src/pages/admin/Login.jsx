@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -10,6 +9,7 @@ import Container from "@mui/material/Container";
 import { LoadingButton } from "@mui/lab";
 import { useNavigate } from "react-router-dom";
 import { axiosInstance } from "../../config/axiosInstance";
+import { validateLogin } from "../../helpers/validation";
 
 const Login = ({ setIsLogged }) => {
   const [loading, setLoading] = useState(false);
@@ -31,6 +31,11 @@ const Login = ({ setIsLogged }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateLogin(dataForm, setError)) {
+      return;
+    }
+
     setLoading(true);
     try {
       const response = await axiosInstance.post("/login", dataForm);
@@ -42,7 +47,8 @@ const Login = ({ setIsLogged }) => {
     } catch (error) {
       console.log(error);
       setLoading(false);
-      const message = error.message || error.response.data;
+      const message = error.response.data.message || error.message;
+
       setError({ show: true, message: message });
     }
   };

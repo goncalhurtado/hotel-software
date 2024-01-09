@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import ContactForm from "../components/contact/ContactForm";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -17,9 +19,9 @@ const Contact = () => {
       justifyContent={"center"}
       textAlign={"center"}
       alignItems={"center"}
+      padding={1}
     >
-      <>Contact us!</>
-
+      <Typography variant="h4">Contact us!</Typography>
       <ContactForm setFormData={setFormData} formData={formData} />
     </Box>
   );

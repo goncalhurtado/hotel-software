@@ -97,7 +97,7 @@ const ContactTable = ({ data, getContacts }) => {
           </LoadingButton>
           <LoadingButton
             color="error"
-            onClick={() => deleteContact(row._id, setLoading)}
+            onClick={() => deleteContact(row, setLoading, getContacts)}
           >
             <DeleteIcon />
           </LoadingButton>

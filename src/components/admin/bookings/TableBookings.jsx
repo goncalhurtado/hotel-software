@@ -137,7 +137,7 @@ const TableBookings = ({ bookings, getBookings, setModal, setEditing }) => {
   }, [bookings]);
 
   return (
-    <>
+    <Box padding={1}>
       <DataTable
         data={bookingsTable}
         columns={columns}
@@ -146,7 +146,7 @@ const TableBookings = ({ bookings, getBookings, setModal, setEditing }) => {
         noDataComponent={<TableSkeleton />}
         customStyles={customStylesBooking}
       />
-    </>
+    </Box>
   );
 };
 
