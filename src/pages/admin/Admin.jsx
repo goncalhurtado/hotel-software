@@ -1,39 +1,52 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Box } from "@mui/material";
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { getContactsReport } from "../../helpers/admin/adminContact";
 import Alert from "@mui/material/Alert";
-import Stack from "@mui/material/Stack";
 import { useNavigate } from "react-router-dom";
+import { getBookingsReports } from "../../helpers/admin/adminBookings";
 
 const Admin = () => {
-  const [contacts, setContacts] = useState({
+  const [reports, setReports] = useState({
     total: "",
     pending: "",
     answered: "",
+    upcomings: "",
+    currents: "",
   });
 
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
-  const getContactsNumber = async () => {
+  const getReportsCalled = useRef(false);
+
+  const getReports = async () => {
+    if (getReportsCalled.current) {
+      return;
+    }
+    getReportsCalled.current = true;
+
     try {
       const data = await getContactsReport();
-      setContacts({
+      const dataBookings = await getBookingsReports();
+      setReports({
         all: data.totalContacts,
         pending: data.totalPendingContacts,
         answered: data.totalAnsweredContacts,
+        upcomings: dataBookings.upcomingBookings,
+        currents: dataBookings.currentBookings,
       });
+
       setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    getContactsNumber();
+    getReports();
   }, []);
 
   return (
@@ -63,20 +76,46 @@ const Admin = () => {
             </Alert>
           ) : (
             <>
-              {contacts.pending === "" ? (
+              {reports.pending === "" ? (
                 <Alert severity="success">
                   All contact request are answered!
                 </Alert>
               ) : (
-                <Alert severity="info">
-                  You have {contacts.pending} pending contacts —{" "}
-                  <u
-                    style={{ cursor: "pointer" }}
-                    onClick={() => navigate("/admin/contact")}
-                  >
-                    check it out!
-                  </u>
-                </Alert>
+                <Box>
+                  {reports.pending > 0 && (
+                    <Alert severity="warning" sx={{ marginBottom: "10px" }}>
+                      You have {reports.pending} pending contacts —{" "}
+                      <u
+                        style={{ cursor: "pointer" }}
+                        onClick={() => navigate("/admin/contact")}
+                      >
+                        check it out!
+                      </u>
+                    </Alert>
+                  )}
+                  {reports.currents > 0 && (
+                    <Alert severity="success" sx={{ marginBottom: "10px" }}>
+                      {reports.currents} guests at the hotel —{" "}
+                      <u
+                        style={{ cursor: "pointer" }}
+                        onClick={() => navigate("/admin/bookings")}
+                      >
+                        check it out!
+                      </u>
+                    </Alert>
+                  )}
+                  {reports.upcomings > 0 && (
+                    <Alert severity="info" sx={{ marginBottom: "10px" }}>
+                      {reports.upcomings} upcoming reservations —{" "}
+                      <u
+                        style={{ cursor: "pointer" }}
+                        onClick={() => navigate("/admin/bookings")}
+                      >
+                        check it out!
+                      </u>
+                    </Alert>
+                  )}
+                </Box>
               )}
             </>
           )}
