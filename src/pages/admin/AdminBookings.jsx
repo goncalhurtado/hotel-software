@@ -13,10 +13,13 @@ const AdminBookings = () => {
   const [modal, setModal] = useState({ action: false, data: {} });
   const [editing, setEditing] = useState({ status: false, data: {} });
   const [loading, setLoading] = useState(false);
+  const [noResult, setNoResult] = useState(false);
+
+  const CURRENT = "current";
   const UPCOMING = "upcoming";
   const PAST = "past";
   const ALL = "all";
-  const [value, setValue] = useState(UPCOMING);
+  const [value, setValue] = useState(CURRENT);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -27,8 +30,13 @@ const AdminBookings = () => {
     try {
       const response = await axiosInstance.get(`/bookings/${query}`);
       setLoading(false);
+      if (response.data.length === 0) {
+        setNoResult(true);
+        return;
+      }
 
       setBookings(response.data.formattedBookings);
+      setNoResult(false);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -52,6 +60,12 @@ const AdminBookings = () => {
           indicatorColor="primary"
           onChange={handleChange}
         >
+          <Tab
+            value={CURRENT}
+            label="Current Guests"
+            onClick={() => getBookings(CURRENT)}
+            disabled={loading}
+          />
           <Tab
             value={UPCOMING}
             label="upcoming"
@@ -78,13 +92,17 @@ const AdminBookings = () => {
             <Box padding={1}>
               <TableSkeleton />
             </Box>
-          ) : (
+          ) : !noResult ? (
             <TableBookings
               bookings={bookings}
               getBookings={getBookings}
               setModal={setModal}
               setEditing={setEditing}
             />
+          ) : (
+            <p style={{ textAlign: "center", marginTop: "50px" }}>
+              You dont have any booking with this filter
+            </p>
           )}
         </>
       ) : (
