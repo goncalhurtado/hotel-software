@@ -7,8 +7,6 @@ import TableRoom from "../../components/admin/rooms/TableRoom";
 import { useState } from "react";
 import ModalRoom from "../../components/admin/rooms/ModalRoom";
 
-// import { useEffect } from "react";
-
 const AdminRooms = () => {
   const [rooms, setRooms] = useState([]);
   const [categories, setCategories] = useState([]);

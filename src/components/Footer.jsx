@@ -2,15 +2,16 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 const Footer = () => {
   const navigate = useNavigate();
   return (
     <Box
       sx={{
-        // width: "100%",
         height: "100px",
-        marginTop: "auto",
+        // marginTop: "auto",
         backgroundColor: "#1976D2",
         color: "#FFFFFF",
         textAlign: "center",
@@ -23,8 +24,13 @@ const Footer = () => {
         flexDirection={{ xs: "column", md: "row" }}
         height={"100%"}
       >
-        <Box>
-          <Typography variant="body1" padding={2}>
+        <Box display={"flex"} alignItems={"center"}>
+          <Typography
+            variant="body1"
+            paddingTop={2}
+            paddingBottom={2}
+            paddingLeft={2}
+          >
             Develop by{" "}
             <a
               style={{
@@ -32,14 +38,29 @@ const Footer = () => {
                 textDecoration: "underline",
                 cursor: "pointer",
               }}
-              // href="goncalhurtado.netlify.app"
+              href="https://goncalhurtado.netlify.app/"
               target="_blank"
             >
               Goncal Hurtado
             </a>
           </Typography>
+          <GitHubIcon
+            style={{ cursor: "pointer", marginLeft: "2px" }}
+            onClick={(e) => {
+              window.open("https://github.com/goncalhurtado", "_blank");
+            }}
+          />
+          <LinkedInIcon
+            style={{ cursor: "pointer", marginLeft: "2px" }}
+            onClick={(e) => {
+              window.open(
+                "https://www.linkedin.com/in/goncalhurtado/",
+                "_blank"
+              );
+            }}
+          />
         </Box>
-        <Box padding={2}>
+        <Box padding={{ xs: 0, sm: 2 }}>
           <a
             onClick={() => {
               navigate("/");

@@ -1,20 +1,20 @@
-import { React, useState } from "react";
 import Box from "@mui/material/Box";
+import { React, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import PrivateRoutes from "./Routes/PrivateRoutes";
-import Login from "./pages/admin/Login";
+import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Bookings from "./pages/Bookings";
+import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import Rooms from "./pages/Rooms";
-import Contact from "./pages/Contact";
 import Admin from "./pages/admin/Admin";
-import AdminCategories from "./pages/admin/AdminCategories";
-import AdminRooms from "./pages/admin/AdminRooms";
 import AdminBookings from "./pages/admin/AdminBookings";
+import AdminCategories from "./pages/admin/AdminCategories";
 import AdminContact from "./pages/admin/AdminContact";
-import Footer from "./components/Footer";
+import AdminRooms from "./pages/admin/AdminRooms";
+import Login from "./pages/admin/Login";
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
