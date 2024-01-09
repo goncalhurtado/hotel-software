@@ -189,7 +189,7 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
           <FormControl
             variant="outlined"
             sx={{
-              width: { xs: "331px", sm: "222px", md: "222px" },
+              width: { xs: "95%", sm: "222px", md: "222px" },
               margin: "10px",
             }}
           >
@@ -227,7 +227,7 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
           <FormControl
             variant="outlined"
             sx={{
-              width: { xs: "331px", sm: "222px", md: "222px" },
+              width: { xs: "95%", sm: "222px", md: "222px" },
               margin: "10px",
               marginRight: { xs: "10px", sm: "10px", md: "10px" },
             }}
@@ -250,7 +250,7 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
           <FormControl
             variant="outlined"
             sx={{
-              width: { xs: "331px", sm: "222px", md: "222px" },
+              width: { xs: "95%", sm: "222px", md: "222px" },
               margin: "10px",
             }}
           >
@@ -281,7 +281,7 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
             name="additionalComments"
             onChange={handleChange}
             sx={{
-              width: { xs: "331px", sm: "464px", md: "464px" },
+              width: { xs: "95%", sm: "464px", md: "464px" },
               margin: "10px",
             }}
             inputProps={{ maxLength: 130 }}
