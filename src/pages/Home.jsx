@@ -3,7 +3,6 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CarouselHome from "../components/home/CarouselHome";
 import Benefits from "../components/home/Benefits";
-import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
@@ -12,7 +11,11 @@ const Home = () => {
   return (
     <Box>
       <CarouselHome />
-      <Box padding={15}>
+      <Box
+        padding={{ xs: 1, sm: 15 }}
+        paddingTop={{ xs: 5 }}
+        paddingBottom={{ xs: 5 }}
+      >
         <Typography variant="h4" textAlign={"center"}>
           Welcome to Hotel Goncal
         </Typography>
@@ -25,7 +28,11 @@ const Home = () => {
         <Benefits />
       </Box>
       <Box>
-        <Typography variant="h4" textAlign={"center"} padding={10}>
+        <Typography
+          variant="h4"
+          textAlign={"center"}
+          padding={{ xs: 3, sm: 10 }}
+        >
           Don't keep waiting,{" "}
           <a
             style={{ textDecoration: "underline", cursor: "pointer" }}

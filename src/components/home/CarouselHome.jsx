@@ -65,6 +65,7 @@ const CarouselHome = () => {
             padding: "0px",
             margin: "0px",
           }}
+          textAlign={"center"}
         >
           HOTEL GONCAL
         </Typography>

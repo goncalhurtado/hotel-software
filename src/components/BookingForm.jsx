@@ -83,7 +83,6 @@ const BookingForm = ({ selected, setSuccessInfo }) => {
           margin: "auto",
           marginTop: "20px",
         }}
-        novalidateBooking
         autoComplete="off"
         onSubmit={handleSubmit}
       >
