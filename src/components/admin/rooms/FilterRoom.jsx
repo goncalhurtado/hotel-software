@@ -25,6 +25,7 @@ const FilterRoom = ({ categories }) => {
         />
         {categories?.map((category) => (
           <Chip
+            key={category._id}
             label={category.name}
             color="primary"
             variant={

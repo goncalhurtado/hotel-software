@@ -7,6 +7,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import TableSkeleton from "../../components/skeletons/TableSkeleton";
+import { useLocation } from "react-router-dom";
 
 const AdminBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -29,6 +30,7 @@ const AdminBookings = () => {
     setLoading(true);
     try {
       const response = await axiosInstance.get(`/bookings/${query}`);
+
       setLoading(false);
       if (response.data.length === 0) {
         setNoResult(true);
@@ -42,6 +44,9 @@ const AdminBookings = () => {
       setLoading(false);
     }
   };
+
+  const location = useLocation();
+
   useEffect(() => {
     getBookings(value);
   }, []);

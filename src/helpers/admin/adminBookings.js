@@ -10,7 +10,7 @@ export const dateFormater = (dateString) => {
 
 export const editBooking = async(formData, setLoading, _id, setEditing, getBookings) => {
 
-    console.log(formData);
+
     setLoading(true)
     try {
         const response = await axiosInstance.put(`/booking/${_id}`, formData);
@@ -21,7 +21,7 @@ export const editBooking = async(formData, setLoading, _id, setEditing, getBooki
             icon: "success",
             confirmButtonText: "Ok",
         });
-        console.log(response);
+
         getBookings();
         setEditing({ status: false, data: {} });
 
