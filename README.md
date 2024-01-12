@@ -6,7 +6,7 @@ This software provides a comprehensive solution for managing hotel information, 
 * [**Hotel Goncal**](https://hotel-goncal.netlify.app/)
 
 > [!TIP]
-> You can test the functionality with the user at /login."
+> If you want to test the admin functionality of this project, email me to goncalhurtado@gmail.com, and I'll promptly send you a test user. Then you can used it at /login.
 
 > [!IMPORTANT]  
 > The first request takes a bit longer as the backend is on a free plan with Render. Please, have patience! 😄.
